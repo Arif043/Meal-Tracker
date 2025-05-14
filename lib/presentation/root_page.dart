@@ -22,6 +22,7 @@ class _RootPageState extends State<RootPage>
   void initState() {
     super.initState();
     _tabController = TabController(length: 3, vsync: this);
+    _tabController.index = 1;
     _tabController.addListener(() => setState(() {}));
   }
 

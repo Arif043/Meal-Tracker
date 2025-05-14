@@ -13,12 +13,15 @@ class FoodBloc extends Bloc<FoodEvent, FoodState> {
 
   FoodBloc() : super(FoodState()) {
     on<LoadFoodEvent>((event, emit) {
-
     });
 
     on<AddFoodEvent>((event, emit) {
       _repo.saveConsumedFood(event.food);
       emit(state.copyWith(consumedFoods: [...?state.consumedFoods, event.food], showDialog: true));
+    },);
+
+    on<FoodRequestedEvent>((event, emit) {
+
     },);
   }
 }

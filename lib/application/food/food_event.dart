@@ -9,3 +9,9 @@ final class AddFoodEvent extends FoodEvent {
 
   AddFoodEvent(this.food);
 }
+
+final class FoodRequestedEvent extends FoodEvent {
+  final String searchTerm;
+
+  FoodRequestedEvent(this.searchTerm);
+}

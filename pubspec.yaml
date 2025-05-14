@@ -47,6 +47,9 @@ dependencies:
   http:
   openfoodfacts: ^3.22.0
   dartz: ^0.10.1
+  crypto:
+  uuid:
+  flutter_secure_storage:
 
 dev_dependencies:
   flutter_test:

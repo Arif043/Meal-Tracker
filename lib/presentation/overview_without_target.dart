@@ -1,3 +1,4 @@
+import 'package:fitness_tracker/theme.dart';
 import 'package:flutter/material.dart';
 
 class OverviewWithoutTarget extends StatelessWidget {
@@ -6,14 +7,35 @@ class OverviewWithoutTarget extends StatelessWidget {
   const OverviewWithoutTarget({super.key, required this.fat, required this.protein, required this.carbs});
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        children: [
-          Text(carbs),
-          Text(fat),
-          Text(protein)
-        ],
-      ),
+    return Column(
+      children: [
+        Material(
+          borderRadius: BorderRadius.circular(12),
+          color: containerColorLight,
+          elevation: 12,
+          child: InkWell(
+            onTap: () => showCalender(context),
+            child: Column(
+              children: [
+                Container(
+                  width: double.infinity,
+                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(12)),
+                  child: Column(children: [
+                  Text(style: lightHeadingText.copyWith(color: containerTextColorLight),"Kohlenhydrate ${_pretty(carbs)}g"),
+                  Text(style: lightHeadingText.copyWith(color: containerTextColorLight),"Fett ${_pretty(fat)}g"),
+                  Text(style: lightHeadingText.copyWith(color: containerTextColorLight),"Protein ${_pretty(protein)}")
+                ],),),
+              ],
+            ),
+          ),
+        ),
+      ],
     );
+  }
+
+  String _pretty(double val) => val.round() == val ? val.toInt().toString() : val.toString();
+
+  void showCalender(BuildContext context) {
+    showDatePicker(context: context, firstDate: DateTime.now().subtract(Duration(days: 10)), lastDate: DateTime.now(), );
   }
 }

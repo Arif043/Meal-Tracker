@@ -1,4 +1,4 @@
-import 'package:fitness_tracker/theme.dart';
+import 'package:fitness_tracker/presentation/core/theme.dart';
 import 'package:flutter/material.dart';
 
 class OverviewWithoutTarget extends StatelessWidget {

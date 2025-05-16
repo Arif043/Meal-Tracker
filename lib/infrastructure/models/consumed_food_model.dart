@@ -1,20 +1,22 @@
 import 'package:isar/isar.dart';
+import 'food_model.dart';
 
 part 'consumed_food_model.g.dart';
+
 @collection
 class ConsumedFood {
   Id id = Isar.autoIncrement;
-
-  String? name;
-  double? fat, carbs, protein;
+  Food? food;
+  double? amount;
   @Index()
   DateTime? timestamp;
 
   ConsumedFood();
 
-  ConsumedFood.fromJson(Map<String, dynamic> json)
-    : name = json['name'],
-      fat = json['fat'];
+  String get name => food!.name!;
 
-  //double get calorien => fat * 9 + carbs * 4 + protein * 4;
+  ConsumedFood.fromJson(Map<String, dynamic> json)
+    : amount = json['amount'] as double,
+      timestamp = DateTime.now(),
+      food = Food.fromJson(json);
 }

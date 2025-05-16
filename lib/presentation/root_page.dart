@@ -49,7 +49,7 @@ class _RootPageState extends State<RootPage>
         floatingActionButton: _tabController.index == 1 ? FloatingActionButton(
           child: Icon(Icons.add),
           onPressed: () {
-            BlocProvider.of<FoodBloc>(context).add(AddFoodEvent(ConsumedFood()));
+            BlocProvider.of<FoodBloc>(context).add(ShowAddDialog());
           },) : null
     );
   }

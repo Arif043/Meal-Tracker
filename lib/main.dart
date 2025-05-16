@@ -1,18 +1,19 @@
 import 'package:fitness_tracker/application/food/food_bloc.dart';
 import 'package:fitness_tracker/presentation/root_page.dart';
-import 'package:fitness_tracker/theme.dart';
+import 'package:fitness_tracker/presentation/core/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:openfoodfacts/openfoodfacts.dart';
 
-void main() {
-  OpenFoodAPIConfiguration.userAgent = UserAgent(name: 'Fitness-Tracker/1.0 (arif.ertugrul@outlook.com)', url: 'https://github.com/arif043');
+const APP_NAME = 'Fitness-Tracker';
 
-  OpenFoodAPIConfiguration.globalLanguages = <OpenFoodFactsLanguage>[
-    OpenFoodFactsLanguage.ENGLISH
-  ];
-
-  OpenFoodAPIConfiguration.globalCountry = OpenFoodFactsCountry.GERMANY;
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await FlutterDownloader.initialize(
+      debug: true, // optional: set to false to disable printing logs to console (default: true)
+      ignoreSsl: true // option: set to false to disable working with http links (default: false)
+  );
 
   runApp(const MyApp());
 }
@@ -23,14 +24,15 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Fitness',
-      debugShowCheckedModeBanner: false,
-      theme: lightTheme,
-      home: BlocProvider(
-          create: (context) => FoodBloc(),
-          lazy: false,
-          child: const RootPage()),
+    return BlocProvider(
+      lazy: false,
+      create: (context) => FoodBloc(),
+      child: MaterialApp(
+        title: 'Fitness',
+        debugShowCheckedModeBanner: false,
+        theme: lightTheme,
+        home: const RootPage(),
+      ),
     );
   }
 }

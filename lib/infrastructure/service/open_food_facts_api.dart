@@ -16,8 +16,7 @@ import '../models/food_model.dart';
 class OpenFoodFactsApi {
   static final _instance = OpenFoodFactsApi._();
   static final header = {
-    'User-Agent': '$APP_NAME/0.1.0 (arif.ertugrul@outlook.de)',
-    'Authorization': 'Basic ${base64Encode(utf8.encode('off:off'))}',
+    'User-Agent': 'App3432 - Android - Version 0.1',
   };
 
   OpenFoodFactsApi._();
@@ -25,34 +24,38 @@ class OpenFoodFactsApi {
   factory OpenFoodFactsApi() => _instance;
 
   Future<List<Food>> search(String searchTerm) async {
-    //https://de.openfoodfacts.org/cgi/search.pl?search_terms=eier&search_simple=1&action=process&json=1
-    log('HTTP Request started', name: 'fitness');
-
     final res = await http.get(
       Uri.https('de.openfoodfacts.org', '/cgi/search.pl', {
         'search_terms': searchTerm,
         'search_simple': '1',
         'action': "process",
+        'fields': 'product_name,selected_images,nutriments',
+        'page_size': '5',
         'json': '1'
       }),
-      //headers: header,
+      headers: header,
     );
-
-
-    final parsedBody = jsonDecode(res.body);
+    debugPrint(res.body);
+    final Map<String, dynamic> parsedBody = jsonDecode(res.body);
+    // debugPrint(parsedBody.toString());
 
     if (res.statusCode != 200) throw ServerException();
-    log(res.statusCode.toString(), name: 'fitness');
 
     final products = <Food>[];
     for (dynamic product in parsedBody['products']) {
-      log(product['product_name'] as String, name: 'fitness');
-      log(product['selected_images']['thumb']['de'] as String, name: 'fitness');
       final food = Food();
-      final thumbUrl = product['selected_images']['thumb']['de'] as String;
-
-
+      final name = product['product_name'] as String;
+      final thumbUrl = product['selected_images']['front']['thumb']['de'] as String;
+      final fat = double.parse(product['nutriments']['fat_100g'].toString());
+      debugPrint(fat.toString());
+      final carbs = double.parse(product['nutriments']['carbohydrates_100g'].toString());
+      debugPrint(carbs.toString());
+      final protein = double.parse(product['nutriments']['proteins_100g'].toString());
+      debugPrint(protein.toString());
       food.name = product['product_name'] as String;
+      food.fat = fat;
+      food.carbs= carbs;
+      food.protein = protein;
       food.thumbUrl = thumbUrl;
       products.add(food);
     }
@@ -67,6 +70,5 @@ class OpenFoodFactsApi {
       secureStorage.write(key: 'uuid', value: uuid);
     }
     OpenFoodAPIConfiguration.uuid = uuid;
-    debugPrint(uuid);
   }
 }

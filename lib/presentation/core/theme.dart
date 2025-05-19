@@ -38,6 +38,8 @@ const TextStyle lightBodyText = TextStyle(
   fontSize: 16,
 );
 
+const TextStyle lightTitleText = TextStyle();
+
 const TextTheme lightTextTheme = TextTheme(
   displayLarge: lightHeadingText,
   bodyLarge: lightBodyText,

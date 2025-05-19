@@ -15,8 +15,8 @@ class ConsumedFood {
 
   String get name => food!.name!;
 
-  ConsumedFood.fromJson(Map<String, dynamic> json)
-    : amount = json['amount'] as double,
-      timestamp = DateTime.now(),
-      food = Food.fromJson(json);
+  // ConsumedFood.fromJson(Map<String, dynamic> json)
+  //   : amount = json['amount'] as double,
+  //     timestamp = DateTime.now(),
+  //     food = Food.fromJson(json);
 }

@@ -1,10 +1,10 @@
-import 'dart:async';
-
+import 'dart:io';
 import 'package:fitness_tracker/application/food/food_bloc.dart';
 import 'package:fitness_tracker/presentation/overview_without_target.dart';
+import 'package:fitness_tracker/presentation/search_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
+import '../application/food/add/add_bloc.dart';
 import 'core/theme.dart';
 
 class HomePage extends StatefulWidget {
@@ -16,20 +16,19 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
 
-  Timer? requestTimer;
-
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(12.0),
       child: BlocConsumer<FoodBloc, FoodState>(
-        listenWhen: (previous, current) => current.showDialog,
         listener: (BuildContext context, FoodState state) {
-          showAddDialog(
-            context,
-            DateTime.now().subtract(Duration(days: 10)),
-            DateTime.now(),
-          );
+          if (state is FoodAddState) {
+            showAddDialog(
+              context,
+              DateTime.now().subtract(Duration(days: 10)),
+              DateTime.now(),
+            );
+          }
         },
         builder: (BuildContext context, state) {
           return Column(
@@ -56,61 +55,14 @@ class _HomePageState extends State<HomePage> {
   }
 
   void showAddDialog(BuildContext context, DateTime from, DateTime to) {
-    final bloc = context.read<FoodBloc>();
     showDialog(
+      useSafeArea: true,
       useRootNavigator: false,
       context: context,
       builder: (context) {
-        return AlertDialog(
-          title: Text('Essen hinzufügen'),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              TextField(
-                onChanged: (value) async {
-                  requestTimer?.cancel();
-
-                  requestTimer = Timer(Duration(seconds: 2), () {
-                    debugPrint("A $value");
-                    BlocProvider.of<FoodBloc>(context,).add(FoodRequestedEvent(value));
-                  },);
-                },
-              ),
-              BlocBuilder<FoodBloc, FoodState>(
-                bloc: bloc,
-                builder: (context, state) {
-                  return SizedBox(
-                    width: double.maxFinite,
-                    height: 100,
-                    child: ListView.builder(
-                      itemCount: state.requestedFoods?.length ?? 0,
-                      itemBuilder: (context, index) {
-                        // debugPrint(state.consumedFoods![0].name);
-                        return ListTile(
-                          title: Text(state.requestedFoods![index].name!),
-                        );
-                      },
-                    ),
-                  );
-                },
-              ),
-            ],
-          ),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              child: Text(
-                'Abbrechen',
-                style: TextStyle(color: lightErrorColor),
-              ),
-            ),
-            TextButton(
-              onPressed: () {},
-              child: Text('Ok', style: TextStyle(color: Colors.green)),
-            ),
-          ],
+        return BlocProvider(
+          create: (context) => AddBloc(),
+          child: SearchDialog(),
         );
       },
     );

@@ -2,28 +2,42 @@ part of 'food_bloc.dart';
 
 @immutable
 class FoodState {
-  final bool showDialog;
   final List<ConsumedFood>? consumedFoods;
-  final List<Food>? requestedFoods;
   final DateTime? date;
 
-  FoodState({this.showDialog = false, List<ConsumedFood>? consumedFoods, List<Food>? requestedFoods, DateTime? date})
-    : consumedFoods = consumedFoods ?? const [],
-      requestedFoods = requestedFoods ?? const [],
-      date = date ?? DateTime.now();
+  FoodState({this.consumedFoods = const [], DateTime? date})
+    : date = date ?? DateTime.now();
 
-  FoodState copyWith({
-    bool? showDialog,
-    List<ConsumedFood>? consumedFoods,
-    List<Food>? requestedFoods,
-    DateTime? date,
-  }) {
+  FoodState copyWith({List<ConsumedFood>? consumedFoods, DateTime? date}) {
     return FoodState(
-      showDialog: showDialog ?? this.showDialog,
       consumedFoods: consumedFoods ?? this.consumedFoods,
-      requestedFoods: requestedFoods ?? this.requestedFoods,
       date: date ?? this.date,
     );
   }
+}
 
+final class FoodAddState extends FoodState {
+  final List<Food>? requestedFoods;
+  final String? term;
+  FoodAddState({
+    this.requestedFoods,
+    this.term,
+    super.consumedFoods,
+    super.date,
+  });
+
+  @override
+  FoodAddState copyWith({
+    List<Food>? requestedFoods,
+    String? term,
+    List<ConsumedFood>? consumedFoods,
+    DateTime? date,
+  }) {
+    return FoodAddState(
+      requestedFoods: requestedFoods ?? this.requestedFoods,
+      term: term ?? this.term,
+      consumedFoods: consumedFoods ?? this.consumedFoods,
+      date: date ?? this.date,
+    );
+  }
 }

@@ -6,7 +6,6 @@ part 'cache.g.dart';
 
 @collection
 class Cache {
-
   Id id = Isar.autoIncrement;
   @Index()
   String? searchTerm;

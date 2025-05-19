@@ -3,16 +3,20 @@ part of 'food_bloc.dart';
 @immutable
 sealed class FoodEvent {}
 
-final class LoadFoodEvent extends FoodEvent {}
-final class ShowAddDialog extends FoodEvent {}
-final class AddFoodEvent extends FoodEvent {
+final class FoodLoadEvent extends FoodEvent {}
+final class FoodAddPressed extends FoodEvent {}
+final class FoodCancelPressed extends FoodEvent {}
+final class FoodAdd extends FoodEvent {
   final ConsumedFood food;
 
-  AddFoodEvent(this.food);
+  FoodAdd(this.food);
 }
 
-final class FoodRequestedEvent extends FoodEvent {
+final class FoodRequested extends FoodEvent {
   final String searchTerm;
-
-  FoodRequestedEvent(this.searchTerm);
+  FoodRequested(this.searchTerm);
+}
+final class FoodRemoteRequested extends FoodEvent {
+  final String searchTerm;
+  FoodRemoteRequested(this.searchTerm);
 }

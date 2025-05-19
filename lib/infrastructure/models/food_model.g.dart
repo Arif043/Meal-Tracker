@@ -33,9 +33,9 @@ const FoodSchema = Schema(
       name: r'protein',
       type: IsarType.double,
     ),
-    r'thumbPath': PropertySchema(
+    r'thumbUrl': PropertySchema(
       id: 4,
-      name: r'thumbPath',
+      name: r'thumbUrl',
       type: IsarType.string,
     )
   },
@@ -58,7 +58,7 @@ int _foodEstimateSize(
     }
   }
   {
-    final value = object.thumbPath;
+    final value = object.thumbUrl;
     if (value != null) {
       bytesCount += 3 + value.length * 3;
     }
@@ -76,7 +76,7 @@ void _foodSerialize(
   writer.writeDouble(offsets[1], object.fat);
   writer.writeString(offsets[2], object.name);
   writer.writeDouble(offsets[3], object.protein);
-  writer.writeString(offsets[4], object.thumbPath);
+  writer.writeString(offsets[4], object.thumbUrl);
 }
 
 Food _foodDeserialize(
@@ -90,7 +90,7 @@ Food _foodDeserialize(
   object.fat = reader.readDoubleOrNull(offsets[1]);
   object.name = reader.readStringOrNull(offsets[2]);
   object.protein = reader.readDoubleOrNull(offsets[3]);
-  object.thumbPath = reader.readStringOrNull(offsets[4]);
+  object.thumbUrl = reader.readStringOrNull(offsets[4]);
   return object;
 }
 
@@ -495,36 +495,36 @@ extension FoodQueryFilter on QueryBuilder<Food, Food, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Food, Food, QAfterFilterCondition> thumbPathIsNull() {
+  QueryBuilder<Food, Food, QAfterFilterCondition> thumbUrlIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'thumbPath',
+        property: r'thumbUrl',
       ));
     });
   }
 
-  QueryBuilder<Food, Food, QAfterFilterCondition> thumbPathIsNotNull() {
+  QueryBuilder<Food, Food, QAfterFilterCondition> thumbUrlIsNotNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'thumbPath',
+        property: r'thumbUrl',
       ));
     });
   }
 
-  QueryBuilder<Food, Food, QAfterFilterCondition> thumbPathEqualTo(
+  QueryBuilder<Food, Food, QAfterFilterCondition> thumbUrlEqualTo(
     String? value, {
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'thumbPath',
+        property: r'thumbUrl',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<Food, Food, QAfterFilterCondition> thumbPathGreaterThan(
+  QueryBuilder<Food, Food, QAfterFilterCondition> thumbUrlGreaterThan(
     String? value, {
     bool include = false,
     bool caseSensitive = true,
@@ -532,14 +532,14 @@ extension FoodQueryFilter on QueryBuilder<Food, Food, QFilterCondition> {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         include: include,
-        property: r'thumbPath',
+        property: r'thumbUrl',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<Food, Food, QAfterFilterCondition> thumbPathLessThan(
+  QueryBuilder<Food, Food, QAfterFilterCondition> thumbUrlLessThan(
     String? value, {
     bool include = false,
     bool caseSensitive = true,
@@ -547,14 +547,14 @@ extension FoodQueryFilter on QueryBuilder<Food, Food, QFilterCondition> {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
         include: include,
-        property: r'thumbPath',
+        property: r'thumbUrl',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<Food, Food, QAfterFilterCondition> thumbPathBetween(
+  QueryBuilder<Food, Food, QAfterFilterCondition> thumbUrlBetween(
     String? lower,
     String? upper, {
     bool includeLower = true,
@@ -563,7 +563,7 @@ extension FoodQueryFilter on QueryBuilder<Food, Food, QFilterCondition> {
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
-        property: r'thumbPath',
+        property: r'thumbUrl',
         lower: lower,
         includeLower: includeLower,
         upper: upper,
@@ -573,69 +573,68 @@ extension FoodQueryFilter on QueryBuilder<Food, Food, QFilterCondition> {
     });
   }
 
-  QueryBuilder<Food, Food, QAfterFilterCondition> thumbPathStartsWith(
+  QueryBuilder<Food, Food, QAfterFilterCondition> thumbUrlStartsWith(
     String value, {
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'thumbPath',
+        property: r'thumbUrl',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<Food, Food, QAfterFilterCondition> thumbPathEndsWith(
+  QueryBuilder<Food, Food, QAfterFilterCondition> thumbUrlEndsWith(
     String value, {
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'thumbPath',
+        property: r'thumbUrl',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<Food, Food, QAfterFilterCondition> thumbPathContains(
-      String value,
+  QueryBuilder<Food, Food, QAfterFilterCondition> thumbUrlContains(String value,
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.contains(
-        property: r'thumbPath',
+        property: r'thumbUrl',
         value: value,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<Food, Food, QAfterFilterCondition> thumbPathMatches(
+  QueryBuilder<Food, Food, QAfterFilterCondition> thumbUrlMatches(
       String pattern,
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.matches(
-        property: r'thumbPath',
+        property: r'thumbUrl',
         wildcard: pattern,
         caseSensitive: caseSensitive,
       ));
     });
   }
 
-  QueryBuilder<Food, Food, QAfterFilterCondition> thumbPathIsEmpty() {
+  QueryBuilder<Food, Food, QAfterFilterCondition> thumbUrlIsEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'thumbPath',
+        property: r'thumbUrl',
         value: '',
       ));
     });
   }
 
-  QueryBuilder<Food, Food, QAfterFilterCondition> thumbPathIsNotEmpty() {
+  QueryBuilder<Food, Food, QAfterFilterCondition> thumbUrlIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'thumbPath',
+        property: r'thumbUrl',
         value: '',
       ));
     });

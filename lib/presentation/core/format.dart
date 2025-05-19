@@ -1,0 +1,1 @@
+String pretty(double val) => val.round() == val ? val.toInt().toString() : val.toString();

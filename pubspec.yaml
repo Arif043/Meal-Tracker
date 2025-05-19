@@ -33,6 +33,7 @@ dependencies:
   path_provider:
   bloc:
   flutter_bloc:
+  rxdart:
   isar:
     hosted:
       name: isar

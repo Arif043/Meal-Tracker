@@ -1,6 +1,8 @@
 import 'package:fitness_tracker/presentation/core/theme.dart';
 import 'package:flutter/material.dart';
 
+import 'core/format.dart';
+
 class OverviewWithoutTarget extends StatelessWidget {
 
   final double carbs, fat, protein;
@@ -21,9 +23,9 @@ class OverviewWithoutTarget extends StatelessWidget {
                   width: double.infinity,
                   decoration: BoxDecoration(borderRadius: BorderRadius.circular(12)),
                   child: Column(children: [
-                  Text(style: lightHeadingText.copyWith(color: containerTextColorLight),"Kohlenhydrate ${_pretty(carbs)}g"),
-                  Text(style: lightHeadingText.copyWith(color: containerTextColorLight),"Fett ${_pretty(fat)}g"),
-                  Text(style: lightHeadingText.copyWith(color: containerTextColorLight),"Protein ${_pretty(protein)}")
+                  Text(style: lightHeadingText.copyWith(color: containerTextColorLight),"Kohlenhydrate ${pretty(carbs)}g"),
+                  Text(style: lightHeadingText.copyWith(color: containerTextColorLight),"Fett ${pretty(fat)}g"),
+                  Text(style: lightHeadingText.copyWith(color: containerTextColorLight),"Protein ${pretty(protein)}")
                 ],),),
               ],
             ),
@@ -32,8 +34,6 @@ class OverviewWithoutTarget extends StatelessWidget {
       ],
     );
   }
-
-  String _pretty(double val) => val.round() == val ? val.toInt().toString() : val.toString();
 
   void showCalender(BuildContext context) {
     showDatePicker(context: context, firstDate: DateTime.now().subtract(Duration(days: 10)), lastDate: DateTime.now(), );

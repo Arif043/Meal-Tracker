@@ -28,8 +28,13 @@ const ConsumedFoodSchema = CollectionSchema(
       type: IsarType.object,
       target: r'Food',
     ),
-    r'timestamp': PropertySchema(
+    r'name': PropertySchema(
       id: 2,
+      name: r'name',
+      type: IsarType.string,
+    ),
+    r'timestamp': PropertySchema(
+      id: 3,
       name: r'timestamp',
       type: IsarType.dateTime,
     )
@@ -75,6 +80,7 @@ int _consumedFoodEstimateSize(
           3 + FoodSchema.estimateSize(value, allOffsets[Food]!, allOffsets);
     }
   }
+  bytesCount += 3 + object.name.length * 3;
   return bytesCount;
 }
 
@@ -91,7 +97,8 @@ void _consumedFoodSerialize(
     FoodSchema.serialize,
     object.food,
   );
-  writer.writeDateTime(offsets[2], object.timestamp);
+  writer.writeString(offsets[2], object.name);
+  writer.writeDateTime(offsets[3], object.timestamp);
 }
 
 ConsumedFood _consumedFoodDeserialize(
@@ -108,7 +115,7 @@ ConsumedFood _consumedFoodDeserialize(
     allOffsets,
   );
   object.id = id;
-  object.timestamp = reader.readDateTimeOrNull(offsets[2]);
+  object.timestamp = reader.readDateTimeOrNull(offsets[3]);
   return object;
 }
 
@@ -128,6 +135,8 @@ P _consumedFoodDeserializeProp<P>(
         allOffsets,
       )) as P;
     case 2:
+      return (reader.readString(offset)) as P;
+    case 3:
       return (reader.readDateTimeOrNull(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
@@ -501,6 +510,140 @@ extension ConsumedFoodQueryFilter
     });
   }
 
+  QueryBuilder<ConsumedFood, ConsumedFood, QAfterFilterCondition> nameEqualTo(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'name',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<ConsumedFood, ConsumedFood, QAfterFilterCondition>
+      nameGreaterThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'name',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<ConsumedFood, ConsumedFood, QAfterFilterCondition> nameLessThan(
+    String value, {
+    bool include = false,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'name',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<ConsumedFood, ConsumedFood, QAfterFilterCondition> nameBetween(
+    String lower,
+    String upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'name',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<ConsumedFood, ConsumedFood, QAfterFilterCondition>
+      nameStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'name',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<ConsumedFood, ConsumedFood, QAfterFilterCondition> nameEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'name',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<ConsumedFood, ConsumedFood, QAfterFilterCondition> nameContains(
+      String value,
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'name',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<ConsumedFood, ConsumedFood, QAfterFilterCondition> nameMatches(
+      String pattern,
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'name',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<ConsumedFood, ConsumedFood, QAfterFilterCondition>
+      nameIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'name',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<ConsumedFood, ConsumedFood, QAfterFilterCondition>
+      nameIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'name',
+        value: '',
+      ));
+    });
+  }
+
   QueryBuilder<ConsumedFood, ConsumedFood, QAfterFilterCondition>
       timestampIsNull() {
     return QueryBuilder.apply(this, (query) {
@@ -603,6 +746,18 @@ extension ConsumedFoodQuerySortBy
     });
   }
 
+  QueryBuilder<ConsumedFood, ConsumedFood, QAfterSortBy> sortByName() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'name', Sort.asc);
+    });
+  }
+
+  QueryBuilder<ConsumedFood, ConsumedFood, QAfterSortBy> sortByNameDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'name', Sort.desc);
+    });
+  }
+
   QueryBuilder<ConsumedFood, ConsumedFood, QAfterSortBy> sortByTimestamp() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'timestamp', Sort.asc);
@@ -642,6 +797,18 @@ extension ConsumedFoodQuerySortThenBy
     });
   }
 
+  QueryBuilder<ConsumedFood, ConsumedFood, QAfterSortBy> thenByName() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'name', Sort.asc);
+    });
+  }
+
+  QueryBuilder<ConsumedFood, ConsumedFood, QAfterSortBy> thenByNameDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'name', Sort.desc);
+    });
+  }
+
   QueryBuilder<ConsumedFood, ConsumedFood, QAfterSortBy> thenByTimestamp() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'timestamp', Sort.asc);
@@ -660,6 +827,13 @@ extension ConsumedFoodQueryWhereDistinct
   QueryBuilder<ConsumedFood, ConsumedFood, QDistinct> distinctByAmount() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'amount');
+    });
+  }
+
+  QueryBuilder<ConsumedFood, ConsumedFood, QDistinct> distinctByName(
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'name', caseSensitive: caseSensitive);
     });
   }
 
@@ -687,6 +861,12 @@ extension ConsumedFoodQueryProperty
   QueryBuilder<ConsumedFood, Food?, QQueryOperations> foodProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'food');
+    });
+  }
+
+  QueryBuilder<ConsumedFood, String, QQueryOperations> nameProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'name');
     });
   }
 

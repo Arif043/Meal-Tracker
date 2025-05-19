@@ -7,13 +7,11 @@ part 'food_model.g.dart';
 class Food {
   String? name;
   double? fat, carbs, protein;
-  String? thumbPath;
-  @Ignore()
   String? thumbUrl;
 
   Food();
 
-  Food.fromJson(Map<String, dynamic> json)
-      : name = json['product_name'];
+  // Food.fromJson(Map<String, dynamic> json)
+  //     : name = json['product_name'];
 
 }

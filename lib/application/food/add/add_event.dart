@@ -17,9 +17,11 @@ final class AddItemSelected extends AddEvent {
     required this.index,
   });
 }
-final class AddRemoteRequested extends AddEvent {
-  final String searchTerm;
-  AddRemoteRequested(this.searchTerm);
-}
-
 final class AddBackToResults extends AddEvent {}
+final class AddItemSubmitted extends AddEvent {
+  final double amount;
+  const AddItemSubmitted({
+    required this.amount,
+  });
+
+}

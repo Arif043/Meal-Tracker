@@ -2,7 +2,8 @@ part of 'add_bloc.dart';
 
 @immutable
 sealed class AddState {
-  const AddState();
+  final String searchInput;
+  const AddState({this.searchInput = ''});
 }
 
 final class AddInitial extends AddState {}
@@ -22,6 +23,7 @@ final class AddSuccess extends AddState {
   final List<Food> requestedFoods;
   const AddSuccess({
     required this.requestedFoods,
+    required super.searchInput,
   });
 }
 final class AddError extends AddState {

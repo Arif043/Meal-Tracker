@@ -1,11 +1,12 @@
 import 'package:fitness_tracker/infrastructure/models/consumed_food_model.dart';
 import 'package:fitness_tracker/presentation/home_page.dart';
+import 'package:fitness_tracker/presentation/target_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../application/food/food_bloc.dart';
 
-const _barTitles = ['Ziele', 'Übersicht', 'Essen'];
+const _barTitles = ['Ziele', 'Übersicht', 'Ziel'];
 
 class RootPage extends StatefulWidget {
   const RootPage({Key? key}) : super(key: key);
@@ -22,7 +23,7 @@ class _RootPageState extends State<RootPage>
   void initState() {
     super.initState();
     _tabController = TabController(length: 3, vsync: this);
-    _tabController.index = 1;
+    _tabController.index = 2;
     _tabController.addListener(() => setState(() {}));
   }
 
@@ -44,7 +45,7 @@ class _RootPageState extends State<RootPage>
         body: TabBarView(controller: _tabController, children: [
           Placeholder(),
           HomePage(),
-          Placeholder()
+          TargetPage()
         ]),
         floatingActionButton: _tabController.index == 1 ? FloatingActionButton(
           child: Icon(Icons.add),

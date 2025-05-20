@@ -3,15 +3,17 @@ import 'package:flutter/material.dart';
 const Color a = Color(0xFFB09398);
 const Color b = Color(0xFF564946);
 
-final Color lightPrimaryColor = Colors.blueGrey.shade50;
+final Color lightPrimaryColor = Colors.red;
 final Color lightPrimaryVariantColor = Colors.blueGrey.shade800;
-final Color lightOnPrimaryColor = Colors.blueGrey.shade200;
+final Color lightOnPrimaryColor = Colors.white;
 const Color lightTextColorPrimary = Colors.black;
 const Color lightErrorColor = Colors.redAccent;
 // Color unselectedLabelColor = Colors.
+final lightScaffoldColor = Colors.yellowAccent[50];
 const Color appbarColorLight = Color(0xFFD0D6B3);
 const Color containerTextColorLight = Colors.white;
 const Color containerColorLight = b;
+
 
 final Color darkPrimaryColor = Colors.blueGrey.shade900;
 const Color darkPrimaryVariantColor = Colors.black;
@@ -76,15 +78,17 @@ final InputDecorationTheme inputDecorationTheme = InputDecorationTheme(
   border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
 );
 
+final TabBarTheme lightTabBarTheme = TabBarTheme(
+  dividerColor: Colors.red,
+  indicatorColor: Colors.orange,
+  labelStyle: lightBodyText,
+  unselectedLabelStyle: TextStyle(color: Colors.red),
+);
+
 final ThemeData lightTheme = ThemeData(
-  tabBarTheme: TabBarTheme(
-    dividerColor: Colors.red,
-    indicatorColor: Colors.orange,
-    labelStyle: lightBodyText,
-    unselectedLabelStyle: TextStyle(color: Colors.red),
-  ),
+  tabBarTheme: lightTabBarTheme,
   inputDecorationTheme: inputDecorationTheme,
-  scaffoldBackgroundColor: lightPrimaryColor,
+  scaffoldBackgroundColor: lightScaffoldColor,
   appBarTheme: const AppBarTheme(
     color: appbarColorLight,
     iconTheme: IconThemeData(color: iconColor),

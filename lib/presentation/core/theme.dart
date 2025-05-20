@@ -32,32 +32,22 @@ const TextStyle lightHeadingText = TextStyle(
   fontWeight: FontWeight.bold,
 );
 
-const TextStyle lightBodyText = TextStyle(
-  color: lightTextColorPrimary,
-  fontFamily: "Rubik",
-  fontStyle: FontStyle.italic,
-  fontWeight: FontWeight.bold,
-  fontSize: 16,
-);
-
-const TextStyle lightTitleText = TextStyle();
+const TextStyle lightBodyText = TextStyle(fontFamily: 'Rubik');
 
 const TextTheme lightTextTheme = TextTheme(
   displayLarge: lightHeadingText,
-  bodyLarge: lightBodyText,
+  bodyMedium: lightBodyText,
 );
 
 final TextStyle darkThemeHeadingTextStyle = lightHeadingText.copyWith(
   color: darkTextColorPrimary,
 );
 
-final TextStyle darkThemeBodyeTextStyle = lightBodyText.copyWith(
-  color: darkTextColorPrimary,
-);
+final TextStyle darkBodyText = lightBodyText.copyWith();
 
 final TextTheme darkTextTheme = TextTheme(
   displayLarge: darkThemeHeadingTextStyle,
-  bodyLarge: darkThemeBodyeTextStyle,
+  bodyLarge: darkBodyText,
 );
 
 final FloatingActionButtonThemeData lightFloatingTheme =

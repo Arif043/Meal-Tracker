@@ -4,8 +4,8 @@ const Color a = Color(0xFFB09398);
 const Color b = Color(0xFF564946);
 
 final Color lightPrimaryColor = Colors.red;
-final Color lightPrimaryVariantColor = Colors.blueGrey.shade800;
-final Color lightOnPrimaryColor = Colors.white;
+final Color lightPrimaryVariantColor = Colors.blue;
+final Color lightOnPrimaryColor = Colors.yellow;
 const Color lightTextColorPrimary = Colors.black;
 const Color lightErrorColor = Colors.redAccent;
 // Color unselectedLabelColor = Colors.

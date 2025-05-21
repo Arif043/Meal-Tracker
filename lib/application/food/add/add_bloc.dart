@@ -30,6 +30,7 @@ class AddBloc extends Bloc<AddEvent, AddState> {
       // Remote API Call
       else {
         await Future.delayed(Duration(seconds: 2));
+        if (emit.isDone) return;
         emit(AddLoading());
         final remoteResult = await _repo.searchRemote(event.searchTerm);
         remoteResult.when(

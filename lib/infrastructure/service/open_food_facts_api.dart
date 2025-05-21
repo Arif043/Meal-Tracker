@@ -6,7 +6,6 @@ import 'package:fitness_tracker/infrastructure/models/consumed_food_model.dart';
 import 'package:fitness_tracker/main.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
-import 'package:openfoodfacts/openfoodfacts.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:uuid/v4.dart';
@@ -30,7 +29,7 @@ class OpenFoodFactsApi {
         'search_simple': '1',
         'action': "process",
         'fields': 'product_name,selected_images,nutriments',
-        'page_size': '5',
+        'page_size': '50',
         'json': '1'
       }),
       headers: header,
@@ -69,6 +68,5 @@ class OpenFoodFactsApi {
       uuid = UuidV4().generate();
       secureStorage.write(key: 'uuid', value: uuid);
     }
-    OpenFoodAPIConfiguration.uuid = uuid;
   }
 }

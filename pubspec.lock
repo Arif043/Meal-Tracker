@@ -270,14 +270,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.2.0"
-  fake_async:
-    dependency: transitive
-    description:
-      name: fake_async
-      sha256: "6a95e56b2449df2273fd8c45a662d6947ce1ebb7aafe80e550a3f68297f3cacc"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.3.2"
   ffi:
     dependency: transitive
     description:
@@ -371,11 +363,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.1.2"
-  flutter_test:
-    dependency: "direct dev"
-    description: flutter
-    source: sdk
-    version: "0.0.0"
   flutter_web_plugins:
     dependency: transitive
     description: flutter
@@ -493,30 +480,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.9.0"
-  leak_tracker:
-    dependency: transitive
-    description:
-      name: leak_tracker
-      sha256: c35baad643ba394b40aac41080300150a4f08fd0fd6a10378f8f7c6bc161acec
-      url: "https://pub.dev"
-    source: hosted
-    version: "10.0.8"
-  leak_tracker_flutter_testing:
-    dependency: transitive
-    description:
-      name: leak_tracker_flutter_testing
-      sha256: f8b613e7e6a13ec79cfdc0e97638fddb3ab848452eff057653abd3edba760573
-      url: "https://pub.dev"
-    source: hosted
-    version: "3.0.9"
-  leak_tracker_testing:
-    dependency: transitive
-    description:
-      name: leak_tracker_testing
-      sha256: "6ba465d5d76e67ddf503e1161d1f4a6bc42306f9d66ca1e8f079a47290fb06d3"
-      url: "https://pub.dev"
-    source: hosted
-    version: "3.0.1"
   lints:
     dependency: transitive
     description:
@@ -589,14 +552,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.0"
-  openfoodfacts:
-    dependency: "direct main"
-    description:
-      name: openfoodfacts
-      sha256: "6017be25868e4c10659713cb203083ae90792b7763f4f2f4595e955bc7371fc0"
-      url: "https://pub.dev"
-    source: hosted
-    version: "3.22.0"
   package_config:
     dependency: transitive
     description:
@@ -710,7 +665,7 @@ packages:
     source: hosted
     version: "1.5.0"
   rxdart:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: rxdart
       sha256: "5c3004a4a8dbb94bd4bf5412a4def4acdaa12e12f269737a5751369e12d1a962"

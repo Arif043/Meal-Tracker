@@ -1,4 +1,3 @@
-import 'package:fitness_tracker/infrastructure/models/consumed_food_model.dart';
 import 'package:fitness_tracker/presentation/home_page.dart';
 import 'package:fitness_tracker/presentation/target_page.dart';
 import 'package:flutter/material.dart';
@@ -6,10 +5,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../application/food/food_bloc.dart';
 
-const _barTitles = ['Ziele', 'Übersicht', 'Ziel'];
+const _barTitles = ['Übersicht', 'Ziel'];
 
 class RootPage extends StatefulWidget {
-  const RootPage({Key? key}) : super(key: key);
+  const RootPage({super.key});
 
   @override
   _RootPageState createState() => _RootPageState();
@@ -22,8 +21,8 @@ class _RootPageState extends State<RootPage>
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 3, vsync: this);
-    _tabController.index = 2;
+    _tabController = TabController(length:2, vsync: this);
+    _tabController.index = 1;
     _tabController.addListener(() => setState(() {}));
   }
 
@@ -38,16 +37,14 @@ class _RootPageState extends State<RootPage>
             tabs: [
               Tab(text: _barTitles[0]),
               Tab(text: _barTitles[1]),
-              Tab(text: _barTitles[2]),
             ],
           ),
         ),
         body: TabBarView(controller: _tabController, children: [
-          Placeholder(),
           HomePage(),
           TargetPage()
         ]),
-        floatingActionButton: _tabController.index == 1 ? FloatingActionButton(
+        floatingActionButton: _tabController.index == 0 ? FloatingActionButton(
           child: Icon(Icons.add),
           onPressed: () {
             context.read<FoodBloc>().add(FoodAddPressed());

@@ -75,8 +75,8 @@ final InputDecorationTheme inputDecorationTheme = InputDecorationTheme(
 
 final TabBarThemeData lightTabBarTheme = TabBarThemeData(
   dividerColor: Colors.blue,
-  indicatorColor: Colors.green,
-  labelStyle: lightBodyText,
+  indicatorColor: Colors.blue,
+  labelStyle: lightBodyText.copyWith(color: Colors.black87, fontWeight: FontWeight.bold),
   unselectedLabelStyle: TextStyle(color: Colors.blue),
 );
 

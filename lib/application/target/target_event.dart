@@ -6,7 +6,7 @@ sealed class TargetEvent {
 }
 
 final class TargetValuesUpdated extends TargetEvent{
-  final double fat, carbs, protein;
+  final int fat, carbs, protein;
 
   const TargetValuesUpdated({
     required this.fat,

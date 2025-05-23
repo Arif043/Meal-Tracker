@@ -8,7 +8,9 @@ sealed class AddState {
 
 final class AddInitial extends AddState {}
 final class AddShowRecommendation extends AddState {}
-final class AddLoading extends AddState {}
+final class AddLoading extends AddState {
+  AddLoading({required super.searchInput});
+}
 final class AddShowDetails extends AddState {
   final List<Food> requestedFoods;
   final int index;
@@ -33,6 +35,7 @@ final class AddError extends AddState {
 
   const AddError({
     required this.failure,
+    required super.searchInput
   });
 
 }

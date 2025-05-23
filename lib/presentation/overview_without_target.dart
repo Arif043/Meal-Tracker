@@ -41,19 +41,19 @@ class OverviewWithoutTarget extends StatelessWidget {
                             style: lightHeadingText.copyWith(
                               color: containerTextColorLight,
                             ),
-                            "Kohlenhydrate ${pretty(carbs)}g${state.carbs != 0 ? ' / ${pretty(state.carbs)}g' : ''}",
+                            "Kohlenhydrate ${pretty(carbs)}g${state.carbs != 0 ? ' / ${state.carbs}g' : ''}",
                           ),
                           Text(
                             style: lightHeadingText.copyWith(
                               color: containerTextColorLight,
                             ),
-                            "Fett ${pretty(fat)}g${state.fat != 0 ? ' / ${pretty(state.fat)}g' : ''}",
+                            "Fett ${pretty(fat)}g${state.fat != 0 ? ' / ${state.fat}g' : ''}",
                           ),
                           Text(
                             style: lightHeadingText.copyWith(
                               color: containerTextColorLight,
                             ),
-                            "Protein ${pretty(protein)}g${state.protein != 0 ? ' / ${pretty(state.protein)}g' : ''}",
+                            "Protein ${pretty(protein)}g${state.protein != 0 ? ' / ${state.protein}g' : ''}",
                           ),
                         ],
                       );

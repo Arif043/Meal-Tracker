@@ -17,9 +17,13 @@ class _TargetPageState extends State<TargetPage> {
   @override
   void initState() {
     super.initState();
-    _fatCtr = TextEditingController();
-    _proteinCtr = TextEditingController();
-    _carbsCtr = TextEditingController();
+    final state = context.read<TargetBloc>().state;
+    final fat = state.fat;
+    final carbs = state.carbs;
+    final protein = state.protein;
+    _fatCtr = TextEditingController(text: fat.toString());
+    _proteinCtr = TextEditingController(text: protein.toString());
+    _carbsCtr = TextEditingController(text: carbs.toString());
   }
 
   @override
@@ -87,9 +91,9 @@ class _TargetPageState extends State<TargetPage> {
               onPressed: () {
                 context.read<TargetBloc>().add(
                   TargetValuesUpdated(
-                    fat: double.parse(_fatCtr.text),
-                    carbs: double.parse(_carbsCtr.text),
-                    protein: double.parse(_proteinCtr.text),
+                    fat: int.parse(_fatCtr.text),
+                    carbs: int.parse(_carbsCtr.text),
+                    protein: int.parse(_proteinCtr.text),
                   ),
                 );
                 ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Ziel gespeichert"), backgroundColor: lightSuccess,));

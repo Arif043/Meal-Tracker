@@ -14,7 +14,7 @@ import '../models/food_model.dart';
 class OpenFoodFactsApi {
 
   static final header = {
-    'User-Agent': 'jkolsdfhf - Android - Version 3',
+    'User-Agent': 'App - Android - Version 0.1',
   };
 
   Future<List<Food>> search(String searchTerm, int pageNumber) async {
@@ -55,18 +55,10 @@ class OpenFoodFactsApi {
       food.thumbUrl = thumbUrl;
       products.add(food);
     }
+
+    if (products.isEmpty)
+      throw ProductsNotFoundException();
+
     return products;
-  }
-
-  void _convert(Map<String, dynamic> product) {
-    if (product.containsKey('selected_images')) {
-      if ((product['selected_images'] as Map<String, dynamic>).containsKey('front')) {
-        if ((product['selected_images']['front'] as Map<String, dynamic>).containsKey('thumb')) {
-          if ((product['selected_images']['front']['thumb'] as Map<String, dynamic>).containsKey('de')) {
-
-          }
-        }
-      }
-    }
   }
 }

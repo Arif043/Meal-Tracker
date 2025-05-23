@@ -163,6 +163,8 @@ class _SearchDialogState extends State<SearchDialog> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 mainAxisSize: MainAxisSize.min,
                 children: [
+                  _searchField(context, state.searchInput),
+                  SizedBox(height: 10,),
                   const Icon(Icons.error, size: 40, color: Colors.redAccent),
                   const SizedBox(height: 20),
                   Text(

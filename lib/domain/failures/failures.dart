@@ -6,7 +6,7 @@ class ProductFailure extends Failure{
 }
 class ServerFailure extends Failure {
   @override
-  String toString() => 'Verbindung wurder unterbrochen';
+  String toString() => 'Verbindung wurde unterbrochen';
 }
 class GeneralFailure extends Failure{
   @override

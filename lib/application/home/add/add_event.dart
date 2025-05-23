@@ -8,7 +8,7 @@ sealed class AddEvent {
 final class AddRequestRecommendation extends AddEvent {}
 final class AddRequested extends AddEvent {
   final String searchTerm;
-  AddRequested(this.searchTerm);
+  const AddRequested(this.searchTerm);
 }
 final class AddItemSelected extends AddEvent {
   final int index;
@@ -23,5 +23,6 @@ final class AddItemSubmitted extends AddEvent {
   const AddItemSubmitted({
     required this.amount,
   });
-
 }
+final class AddNextPagePressed extends AddEvent{}
+final class AddPreviousPagePressed extends AddEvent{}

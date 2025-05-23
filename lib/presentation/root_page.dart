@@ -2,8 +2,7 @@ import 'package:fitness_tracker/presentation/home_page.dart';
 import 'package:fitness_tracker/presentation/target_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../application/food/food_bloc.dart';
+import '../application/home/home_bloc.dart';
 
 const _barTitles = ['Übersicht', 'Ziel'];
 
@@ -47,7 +46,7 @@ class _RootPageState extends State<RootPage>
         floatingActionButton: _tabController.index == 0 ? FloatingActionButton(
           child: Icon(Icons.add),
           onPressed: () {
-            context.read<FoodBloc>().add(FoodAddPressed());
+            context.read<HomeBloc>().add(HomeAddPressed());
           },) : null
     );
   }

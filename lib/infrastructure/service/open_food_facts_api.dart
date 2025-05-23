@@ -9,20 +9,15 @@ import 'package:http/http.dart' as http;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:uuid/v4.dart';
-
 import '../models/food_model.dart';
 
 class OpenFoodFactsApi {
-  static final _instance = OpenFoodFactsApi._();
+
   static final header = {
-    'User-Agent': 'App3432 - Android - Version 0.1',
+    'User-Agent': 'jkolsdfhf - Android - Version 3',
   };
 
-  OpenFoodFactsApi._();
-
-  factory OpenFoodFactsApi() => _instance;
-
-  Future<List<Food>> search(String searchTerm) async {
+  Future<List<Food>> search(String searchTerm, int pageNumber) async {
     final res = await http.get(
       Uri.https('de.openfoodfacts.org', '/cgi/search.pl', {
         'search_terms': searchTerm,
@@ -30,43 +25,48 @@ class OpenFoodFactsApi {
         'action': "process",
         'fields': 'product_name,selected_images,nutriments',
         'page_size': '50',
+        'page': '$pageNumber',
         'json': '1'
       }),
-      headers: header,
+      //headers: header,
     );
     debugPrint(res.body);
-    final Map<String, dynamic> parsedBody = jsonDecode(res.body);
-    // debugPrint(parsedBody.toString());
-
+    late final Map<String, dynamic> parsedBody;
+    try {
+      parsedBody = jsonDecode(res.body);
+    } on FormatException {
+      throw ServerException();
+    }
+    debugPrint(res.body);
     if (res.statusCode != 200) throw ServerException();
 
     final products = <Food>[];
     for (dynamic product in parsedBody['products']) {
       final food = Food();
-      final name = product['product_name'] as String;
-      final thumbUrl = product['selected_images']['front']['thumb']['de'] as String;
-      final fat = double.parse(product['nutriments']['fat_100g'].toString());
-      debugPrint(fat.toString());
-      final carbs = double.parse(product['nutriments']['carbohydrates_100g'].toString());
-      debugPrint(carbs.toString());
-      final protein = double.parse(product['nutriments']['proteins_100g'].toString());
-      debugPrint(protein.toString());
-      food.name = product['product_name'] as String;
-      food.fat = fat;
-      food.carbs= carbs;
-      food.protein = protein;
+      final name = product?['product_name'] as String? ?? '';
+      final thumbUrl = product?['selected_images']?['front']?['thumb']?['de'] as String? ?? '';
+      final fat = product?['nutriments']?['fat_100g'] as Object? ?? '';
+      final carbs = product?['nutriments']?['carbohydrates_100g'] as Object? ?? '';
+      final protein = product?['nutriments']?['proteins_100g'] as Object? ?? '';
+      food.name = product?['product_name'] as String? ?? '';
+      food.fat = fat.toString();
+      food.carbs = carbs.toString();
+      food.protein = protein.toString();
       food.thumbUrl = thumbUrl;
       products.add(food);
     }
     return products;
   }
 
-  void _setUuid() async {
-    final secureStorage = FlutterSecureStorage();
-    var uuid = await secureStorage.read(key: 'uuid');
-    if (uuid == null) {
-      uuid = UuidV4().generate();
-      secureStorage.write(key: 'uuid', value: uuid);
+  void _convert(Map<String, dynamic> product) {
+    if (product.containsKey('selected_images')) {
+      if ((product['selected_images'] as Map<String, dynamic>).containsKey('front')) {
+        if ((product['selected_images']['front'] as Map<String, dynamic>).containsKey('thumb')) {
+          if ((product['selected_images']['front']['thumb'] as Map<String, dynamic>).containsKey('de')) {
+
+          }
+        }
+      }
     }
   }
 }

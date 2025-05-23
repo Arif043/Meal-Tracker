@@ -1,22 +1,16 @@
 import 'dart:io';
 
 import 'package:fitness_tracker/infrastructure/models/cache.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:isar/isar.dart';
 import 'package:path_provider/path_provider.dart';
 import '../models/consumed_food_model.dart';
 import '../models/food_model.dart';
 
 class LocalDatabaseService {
-  static final _instance = LocalDatabaseService._();
   late final Isar _isar;
 
-  LocalDatabaseService._() {
-    _init();
-  }
-
-  factory LocalDatabaseService() => _instance;
-
-  void _init() async {
+  Future<void> init() async {
     final dir = await getApplicationDocumentsDirectory();
     _isar = await Isar.open([
       ConsumedFoodSchema,
@@ -24,8 +18,8 @@ class LocalDatabaseService {
     ], directory: dir.path);
   }
 
-  Future<List<ConsumedFood>> loadConsumedFoods(DateTime? selectedDay) async {
-    selectedDay ??= DateTime.now();
+  Future<List<ConsumedFood>> loadConsumedFoods(DateTime selectedDay) async {
+    debugPrint(selectedDay.toString());
     final from = DateTime(selectedDay.year, selectedDay.month, selectedDay.day);
     final to = from.copyWith(hour: 23, minute: 59, second: 59);
     return await _isar.consumedFoods
@@ -34,10 +28,15 @@ class LocalDatabaseService {
         .findAll();
   }
 
-  void saveConsumedFood(ConsumedFood food) async {
+  Future<List<ConsumedFood>> saveConsumedFood(Food food, double amount) async {
+    final consumed = ConsumedFood()
+    ..food = food
+    ..amount = amount
+    ..timestamp = DateTime.now();
     await _isar.writeTxn(() async {
-      await _isar.consumedFoods.put(food);
+      await _isar.consumedFoods.put(consumed);
     });
+    return loadConsumedFoods(DateTime.now());
   }
 
   Future<bool> existsCachedFood(String searchTerm) async =>
@@ -47,6 +46,12 @@ class LocalDatabaseService {
   Future<List<Food>> loadFoods(String searchTerm) async =>
       (await _isar.caches.where().searchTermEqualTo(searchTerm).findFirst())!
           .foods!;
+
+  Future<void> removeConsumedFood(ConsumedFood food) async {
+    await _isar.writeTxn(() async {
+      await _isar.consumedFoods.delete(food.id);
+    },);
+  }
 
   void cacheFoods(String searchTerm, List<Food> foods) async {
     final cache =

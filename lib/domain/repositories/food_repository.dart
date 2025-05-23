@@ -8,8 +8,11 @@ abstract class FoodRepository {
   Future<Result<List<Food>, Failure>> searchRemote(String term);
   Future<List<Food>> searchInCache(String searchTerm);
   // double getMakro(Product products, Nutrient nutrient);
-  Future<List<ConsumedFood>> loadConsumedFoods(DateTime? selectedDay);
-  void saveConsumedFood(ConsumedFood food);
-
+  Future<List<ConsumedFood>> loadConsumedFoods(DateTime selectedDay);
+  Future<List<ConsumedFood>> saveConsumedFood(Food food, double amount);
+  Future<Result<List<Food>, Failure>> showPreviousPage(String term);
+  Future<Result<List<Food>, Failure>> showNextPage(String term);
+  Future<void> removeConsumedFood(ConsumedFood food);
+  int get pageNumber;
   void close();
 }

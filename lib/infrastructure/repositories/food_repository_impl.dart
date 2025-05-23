@@ -12,30 +12,29 @@ import '../../domain/failures/failures.dart';
 import '../models/food_model.dart';
 
 class FoodRepositoryImpl implements FoodRepository {
-  static final _instance = FoodRepositoryImpl._();
-  final _openFoodApi = OpenFoodFactsApi();
-  final _dbService = LocalDatabaseService();
+  final OpenFoodFactsApi _openFoodApi;
+  final LocalDatabaseService _dbService;
 
-  FoodRepositoryImpl._();
-  factory FoodRepositoryImpl() => _instance;
+  int _pageNumber = 1;
+  int get pageNumber => _pageNumber;
+
+  FoodRepositoryImpl(this._openFoodApi, this._dbService);
 
   @override
   Future<Result<List<Food>, Failure>> searchRemote(String term) async {
-    debugPrint('REMOTE CALL');
-    return Success([]);
-    // try {
-    //   final foods = await _openFoodApi.search(term);
-    //   if (foods.isNotEmpty) {
-    //     _dbService.cacheFoods(term, foods);
-    //   }
-    //   return Success(foods);
-    // } on ProductsNotFoundException {
-    //   return Error(ProductFailure());
-    // } catch (e, s) {
-    //   debugPrint(e.toString());
-    //   debugPrint(s.toString());
-    //   return Error(GeneralFailure());
-    // }
+    try {
+      final foods = await _openFoodApi.search(term, _pageNumber);
+      if (foods.isNotEmpty) {
+        _dbService.cacheFoods(term, foods);
+      }
+      return Success(foods);
+    } on ProductsNotFoundException {
+      return Error(ProductFailure());
+    } catch (e, s) {
+      debugPrint(e.toString());
+      debugPrint(s.toString());
+      return Error(GeneralFailure());
+    }
   }
 
   @override
@@ -46,16 +45,32 @@ class FoodRepositoryImpl implements FoodRepository {
     return const [];
   }
 
+  Future<Result<List<Food>, Failure>> showPreviousPage(String term) async {
+    // if (_pageNumber == 0)
+    //   return;
+
+    _pageNumber--;
+    return searchRemote(term);
+  }
+
+  Future<Result<List<Food>, Failure>> showNextPage(String term) async {
+    _pageNumber++;
+    return searchRemote(term);
+  }
+
+  @override
+  Future<void> removeConsumedFood(ConsumedFood food) => _dbService.removeConsumedFood(food);
+
   // @override
   // double getMakro(Product products, Nutrient nutrient) =>
   //     products.nutriments?.getValue(nutrient, PerSize.oneHundredGrams) ?? 0;
 
   @override
-  Future<List<ConsumedFood>> loadConsumedFoods(DateTime? selectedDay) =>
+  Future<List<ConsumedFood>> loadConsumedFoods(DateTime selectedDay) =>
       _dbService.loadConsumedFoods(selectedDay);
 
   @override
-  void saveConsumedFood(ConsumedFood food) => _dbService.saveConsumedFood(food);
+  Future<List<ConsumedFood>> saveConsumedFood(Food food, double amount) => _dbService.saveConsumedFood(food, amount);
 
   @override
   void close() {

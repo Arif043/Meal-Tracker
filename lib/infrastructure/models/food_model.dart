@@ -6,7 +6,7 @@ part 'food_model.g.dart';
 @embedded
 class Food {
   String? name;
-  double? fat, carbs, protein;
+  String? fat, carbs, protein;
   String? thumbUrl;
 
   Food();

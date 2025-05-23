@@ -16,12 +16,12 @@ const FoodSchema = Schema(
     r'carbs': PropertySchema(
       id: 0,
       name: r'carbs',
-      type: IsarType.double,
+      type: IsarType.string,
     ),
     r'fat': PropertySchema(
       id: 1,
       name: r'fat',
-      type: IsarType.double,
+      type: IsarType.string,
     ),
     r'name': PropertySchema(
       id: 2,
@@ -31,7 +31,7 @@ const FoodSchema = Schema(
     r'protein': PropertySchema(
       id: 3,
       name: r'protein',
-      type: IsarType.double,
+      type: IsarType.string,
     ),
     r'thumbUrl': PropertySchema(
       id: 4,
@@ -52,7 +52,25 @@ int _foodEstimateSize(
 ) {
   var bytesCount = offsets.last;
   {
+    final value = object.carbs;
+    if (value != null) {
+      bytesCount += 3 + value.length * 3;
+    }
+  }
+  {
+    final value = object.fat;
+    if (value != null) {
+      bytesCount += 3 + value.length * 3;
+    }
+  }
+  {
     final value = object.name;
+    if (value != null) {
+      bytesCount += 3 + value.length * 3;
+    }
+  }
+  {
+    final value = object.protein;
     if (value != null) {
       bytesCount += 3 + value.length * 3;
     }
@@ -72,10 +90,10 @@ void _foodSerialize(
   List<int> offsets,
   Map<Type, List<int>> allOffsets,
 ) {
-  writer.writeDouble(offsets[0], object.carbs);
-  writer.writeDouble(offsets[1], object.fat);
+  writer.writeString(offsets[0], object.carbs);
+  writer.writeString(offsets[1], object.fat);
   writer.writeString(offsets[2], object.name);
-  writer.writeDouble(offsets[3], object.protein);
+  writer.writeString(offsets[3], object.protein);
   writer.writeString(offsets[4], object.thumbUrl);
 }
 
@@ -86,10 +104,10 @@ Food _foodDeserialize(
   Map<Type, List<int>> allOffsets,
 ) {
   final object = Food();
-  object.carbs = reader.readDoubleOrNull(offsets[0]);
-  object.fat = reader.readDoubleOrNull(offsets[1]);
+  object.carbs = reader.readStringOrNull(offsets[0]);
+  object.fat = reader.readStringOrNull(offsets[1]);
   object.name = reader.readStringOrNull(offsets[2]);
-  object.protein = reader.readDoubleOrNull(offsets[3]);
+  object.protein = reader.readStringOrNull(offsets[3]);
   object.thumbUrl = reader.readStringOrNull(offsets[4]);
   return object;
 }
@@ -102,13 +120,13 @@ P _foodDeserializeProp<P>(
 ) {
   switch (propertyId) {
     case 0:
-      return (reader.readDoubleOrNull(offset)) as P;
+      return (reader.readStringOrNull(offset)) as P;
     case 1:
-      return (reader.readDoubleOrNull(offset)) as P;
+      return (reader.readStringOrNull(offset)) as P;
     case 2:
       return (reader.readStringOrNull(offset)) as P;
     case 3:
-      return (reader.readDoubleOrNull(offset)) as P;
+      return (reader.readStringOrNull(offset)) as P;
     case 4:
       return (reader.readStringOrNull(offset)) as P;
     default:
@@ -134,54 +152,54 @@ extension FoodQueryFilter on QueryBuilder<Food, Food, QFilterCondition> {
   }
 
   QueryBuilder<Food, Food, QAfterFilterCondition> carbsEqualTo(
-    double? value, {
-    double epsilon = Query.epsilon,
+    String? value, {
+    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'carbs',
         value: value,
-        epsilon: epsilon,
+        caseSensitive: caseSensitive,
       ));
     });
   }
 
   QueryBuilder<Food, Food, QAfterFilterCondition> carbsGreaterThan(
-    double? value, {
+    String? value, {
     bool include = false,
-    double epsilon = Query.epsilon,
+    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         include: include,
         property: r'carbs',
         value: value,
-        epsilon: epsilon,
+        caseSensitive: caseSensitive,
       ));
     });
   }
 
   QueryBuilder<Food, Food, QAfterFilterCondition> carbsLessThan(
-    double? value, {
+    String? value, {
     bool include = false,
-    double epsilon = Query.epsilon,
+    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
         include: include,
         property: r'carbs',
         value: value,
-        epsilon: epsilon,
+        caseSensitive: caseSensitive,
       ));
     });
   }
 
   QueryBuilder<Food, Food, QAfterFilterCondition> carbsBetween(
-    double? lower,
-    double? upper, {
+    String? lower,
+    String? upper, {
     bool includeLower = true,
     bool includeUpper = true,
-    double epsilon = Query.epsilon,
+    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
@@ -190,7 +208,73 @@ extension FoodQueryFilter on QueryBuilder<Food, Food, QFilterCondition> {
         includeLower: includeLower,
         upper: upper,
         includeUpper: includeUpper,
-        epsilon: epsilon,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Food, Food, QAfterFilterCondition> carbsStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'carbs',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Food, Food, QAfterFilterCondition> carbsEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'carbs',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Food, Food, QAfterFilterCondition> carbsContains(String value,
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'carbs',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Food, Food, QAfterFilterCondition> carbsMatches(String pattern,
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'carbs',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Food, Food, QAfterFilterCondition> carbsIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'carbs',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<Food, Food, QAfterFilterCondition> carbsIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'carbs',
+        value: '',
       ));
     });
   }
@@ -212,54 +296,54 @@ extension FoodQueryFilter on QueryBuilder<Food, Food, QFilterCondition> {
   }
 
   QueryBuilder<Food, Food, QAfterFilterCondition> fatEqualTo(
-    double? value, {
-    double epsilon = Query.epsilon,
+    String? value, {
+    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'fat',
         value: value,
-        epsilon: epsilon,
+        caseSensitive: caseSensitive,
       ));
     });
   }
 
   QueryBuilder<Food, Food, QAfterFilterCondition> fatGreaterThan(
-    double? value, {
+    String? value, {
     bool include = false,
-    double epsilon = Query.epsilon,
+    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         include: include,
         property: r'fat',
         value: value,
-        epsilon: epsilon,
+        caseSensitive: caseSensitive,
       ));
     });
   }
 
   QueryBuilder<Food, Food, QAfterFilterCondition> fatLessThan(
-    double? value, {
+    String? value, {
     bool include = false,
-    double epsilon = Query.epsilon,
+    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
         include: include,
         property: r'fat',
         value: value,
-        epsilon: epsilon,
+        caseSensitive: caseSensitive,
       ));
     });
   }
 
   QueryBuilder<Food, Food, QAfterFilterCondition> fatBetween(
-    double? lower,
-    double? upper, {
+    String? lower,
+    String? upper, {
     bool includeLower = true,
     bool includeUpper = true,
-    double epsilon = Query.epsilon,
+    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
@@ -268,7 +352,73 @@ extension FoodQueryFilter on QueryBuilder<Food, Food, QFilterCondition> {
         includeLower: includeLower,
         upper: upper,
         includeUpper: includeUpper,
-        epsilon: epsilon,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Food, Food, QAfterFilterCondition> fatStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'fat',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Food, Food, QAfterFilterCondition> fatEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'fat',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Food, Food, QAfterFilterCondition> fatContains(String value,
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'fat',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Food, Food, QAfterFilterCondition> fatMatches(String pattern,
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'fat',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Food, Food, QAfterFilterCondition> fatIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'fat',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<Food, Food, QAfterFilterCondition> fatIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'fat',
+        value: '',
       ));
     });
   }
@@ -434,54 +584,54 @@ extension FoodQueryFilter on QueryBuilder<Food, Food, QFilterCondition> {
   }
 
   QueryBuilder<Food, Food, QAfterFilterCondition> proteinEqualTo(
-    double? value, {
-    double epsilon = Query.epsilon,
+    String? value, {
+    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'protein',
         value: value,
-        epsilon: epsilon,
+        caseSensitive: caseSensitive,
       ));
     });
   }
 
   QueryBuilder<Food, Food, QAfterFilterCondition> proteinGreaterThan(
-    double? value, {
+    String? value, {
     bool include = false,
-    double epsilon = Query.epsilon,
+    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         include: include,
         property: r'protein',
         value: value,
-        epsilon: epsilon,
+        caseSensitive: caseSensitive,
       ));
     });
   }
 
   QueryBuilder<Food, Food, QAfterFilterCondition> proteinLessThan(
-    double? value, {
+    String? value, {
     bool include = false,
-    double epsilon = Query.epsilon,
+    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
         include: include,
         property: r'protein',
         value: value,
-        epsilon: epsilon,
+        caseSensitive: caseSensitive,
       ));
     });
   }
 
   QueryBuilder<Food, Food, QAfterFilterCondition> proteinBetween(
-    double? lower,
-    double? upper, {
+    String? lower,
+    String? upper, {
     bool includeLower = true,
     bool includeUpper = true,
-    double epsilon = Query.epsilon,
+    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
@@ -490,7 +640,73 @@ extension FoodQueryFilter on QueryBuilder<Food, Food, QFilterCondition> {
         includeLower: includeLower,
         upper: upper,
         includeUpper: includeUpper,
-        epsilon: epsilon,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Food, Food, QAfterFilterCondition> proteinStartsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.startsWith(
+        property: r'protein',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Food, Food, QAfterFilterCondition> proteinEndsWith(
+    String value, {
+    bool caseSensitive = true,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.endsWith(
+        property: r'protein',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Food, Food, QAfterFilterCondition> proteinContains(String value,
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.contains(
+        property: r'protein',
+        value: value,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Food, Food, QAfterFilterCondition> proteinMatches(String pattern,
+      {bool caseSensitive = true}) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.matches(
+        property: r'protein',
+        wildcard: pattern,
+        caseSensitive: caseSensitive,
+      ));
+    });
+  }
+
+  QueryBuilder<Food, Food, QAfterFilterCondition> proteinIsEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'protein',
+        value: '',
+      ));
+    });
+  }
+
+  QueryBuilder<Food, Food, QAfterFilterCondition> proteinIsNotEmpty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        property: r'protein',
+        value: '',
       ));
     });
   }

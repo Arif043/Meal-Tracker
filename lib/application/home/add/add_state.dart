@@ -21,8 +21,10 @@ final class AddShowDetails extends AddState {
 }
 final class AddSuccess extends AddState {
   final List<Food> requestedFoods;
+  final int pageNumber;
   const AddSuccess({
     required this.requestedFoods,
+    required this.pageNumber,
     required super.searchInput,
   });
 }

@@ -5,15 +5,16 @@ const Color b = Color(0xFF564946);
 
 final Color lightPrimaryColor = Colors.red;
 final Color lightPrimaryVariantColor = Colors.blue;
-final Color lightOnPrimaryColor = Colors.yellow;
+final Color lightOnPrimaryColor = Colors.white;
+final Color lightSurfaceColor = Color(0xFFfef1e3);
 const Color lightTextColorPrimary = Colors.black;
 const Color lightErrorColor = Colors.redAccent;
+final Color lightSuccess = Colors.green[700] ?? Colors.green;
 // Color unselectedLabelColor = Colors.
 final lightScaffoldColor = Colors.yellowAccent[50];
-const Color appbarColorLight = Color(0xFFD0D6B3);
-const Color containerTextColorLight = Colors.white;
-const Color containerColorLight = b;
-
+const Color appbarColorLight = Color(0xFFFCD0A1);
+const Color containerTextColorLight = Colors.black;
+const Color containerColorLight = Color(0xFFDDF0FF);
 
 final Color darkPrimaryColor = Colors.blueGrey.shade900;
 const Color darkPrimaryVariantColor = Colors.black;
@@ -21,7 +22,7 @@ final Color darkOnPrimaryColor = Colors.blueGrey.shade300;
 const Color darkTextColorPrimary = Colors.white;
 final Color appbarColorDark = Colors.blueGrey.shade800;
 
-const Color iconColor = Colors.white;
+const Color iconColor = Colors.red;
 
 const Color accentColorDark = Color.fromRGBO(74, 217, 217, 1);
 
@@ -33,6 +34,8 @@ const TextStyle lightHeadingText = TextStyle(
 );
 
 const TextStyle lightBodyText = TextStyle(fontFamily: 'Rubik');
+
+const TextStyle lightDetailTitle = TextStyle(fontFamily: 'Rubik', fontWeight: FontWeight.bold, fontSize: 16);
 
 const TextTheme lightTextTheme = TextTheme(
   displayLarge: lightHeadingText,
@@ -56,6 +59,8 @@ final FloatingActionButtonThemeData lightFloatingTheme =
       foregroundColor: containerColorLight,
     );
 
+final IconThemeData iconTheme = IconThemeData(color: iconColor);
+
 final InputDecorationTheme inputDecorationTheme = InputDecorationTheme(
   filled: true,
   fillColor: appbarColorLight,
@@ -76,12 +81,12 @@ final TabBarTheme lightTabBarTheme = TabBarTheme(
 );
 
 final ThemeData lightTheme = ThemeData(
-  tabBarTheme: lightTabBarTheme,
+  // tabBarTheme: lightTabBarTheme,
   inputDecorationTheme: inputDecorationTheme,
   scaffoldBackgroundColor: lightScaffoldColor,
-  appBarTheme: const AppBarTheme(
+  appBarTheme: AppBarTheme(
     color: appbarColorLight,
-    iconTheme: IconThemeData(color: iconColor),
+    iconTheme: iconTheme,
   ),
   bottomAppBarTheme: const BottomAppBarTheme(color: appbarColorLight),
   colorScheme: ColorScheme.light(
@@ -92,6 +97,7 @@ final ThemeData lightTheme = ThemeData(
   ),
   textTheme: lightTextTheme,
   floatingActionButtonTheme: lightFloatingTheme,
+  iconTheme: iconTheme
 );
 
 final ThemeData darkTheme = ThemeData(

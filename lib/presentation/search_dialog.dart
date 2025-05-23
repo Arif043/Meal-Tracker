@@ -1,18 +1,41 @@
 import 'package:fitness_tracker/presentation/core/format.dart';
+import 'package:fitness_tracker/presentation/core/image_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../application/food/add/add_bloc.dart';
-import '../application/food/food_bloc.dart';
+import '../application/home/add/add_bloc.dart';
+import '../application/home/home_bloc.dart';
 import 'core/theme.dart';
 
-class SearchDialog extends StatelessWidget {
+class SearchDialog extends StatefulWidget {
   const SearchDialog({super.key});
+
+  @override
+  State<SearchDialog> createState() => _SearchDialogState();
+}
+
+class _SearchDialogState extends State<SearchDialog> {
+
+  late final TextEditingController _amountTextController;
+
+  @override
+  void initState() {
+    super.initState();
+    _amountTextController = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    _amountTextController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    final foodBloc = context.read<FoodBloc>();
+    final foodBloc = context.read<HomeBloc>();
     // final addBloc = context.read<AddBloc>();
     final addBloc = BlocProvider.of<AddBloc>(context, listen: true);
     return AlertDialog(
+      backgroundColor: lightSurfaceColor,
       title:
           addBloc.state is AddShowDetails
               ? Row(
@@ -58,7 +81,7 @@ class SearchDialog extends StatelessWidget {
                       child: ListView.separated(
                         shrinkWrap: true,
                         separatorBuilder:
-                            (context, index) => Padding(
+                            (_, _) => Padding(
                               padding: EdgeInsets.symmetric(vertical: 10),
                               child: Divider(thickness: 1),
                             ),
@@ -69,9 +92,7 @@ class SearchDialog extends StatelessWidget {
                             onTap:
                                 () =>
                                     addBloc.add(AddItemSelected(index: index)),
-                            leading: Image.network(
-                              state.requestedFoods[index].thumbUrl!,
-                            ),
+                            leading: ImageView(url: state.requestedFoods[index].thumbUrl!),
                             title: Text(
                               state.requestedFoods[index].name!,
                               textAlign: TextAlign.right,
@@ -92,33 +113,41 @@ class SearchDialog extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Image.network(requestedFoods[index].thumbUrl!),
-                      Column(
-                        // crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          Text(
-                            requestedFoods[index].name!,
-                            overflow: TextOverflow.ellipsis,
-                            maxLines: 2,
-                            style: TextTheme.of(context).bodyLarge,
-                          ),
-                          Text(
-                            "Fett ${pretty(requestedFoods[index].fat!)}",
-                            style: TextTheme.of(context).bodyMedium,
-                          ),
-                          Text(
-                            "Kohlenhydrate ${pretty(requestedFoods[index].carbs!)}",
-                          ),
-                          Text(
-                            "Protein ${pretty(requestedFoods[index].protein!)}",
-                          ),
-                          // Text(requestedFoods[index])
-                        ],
+                      Padding(
+                        padding: const EdgeInsets.only(right: 12),
+                        child: ImageView(url: state.requestedFoods[index].thumbUrl!),
+                      ),
+                      Expanded(
+                        child: Column(
+                          // crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              textAlign: TextAlign.center,
+                              requestedFoods[index].name!,
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 3,
+                              style: lightDetailTitle,
+                            ),
+                            SizedBox(height: 10,),
+                            Text(
+                              "Fett: ${prepareValue(requestedFoods[index].fat!)}", //${pretty(requestedFoods[index].fat!)}",
+                              style: TextTheme.of(context).bodyMedium,
+                            ),
+                            Text(
+                              "Kohlenhydrate: ${prepareValue(requestedFoods[index].carbs!)}", //${pretty(requestedFoods[index].carbs!)}",
+                            ),
+                            Text(
+                              "Protein: ${prepareValue(requestedFoods[index].protein!)}", //${pretty(requestedFoods[index].protein!)}",
+                            ),
+                            // Text(requestedFoods[index])
+                          ],
+                        ),
                       ),
                     ],
                   ),
-                  SizedBox(height: 10),
+                  SizedBox(height: 20),
                   TextField(
+                    controller: _amountTextController,
                     decoration: InputDecoration(labelText: 'Menge hinzufügen'),
                     keyboardType: TextInputType.numberWithOptions(
                       decimal: true,
@@ -146,36 +175,34 @@ class SearchDialog extends StatelessWidget {
       ),
       actions: [
         if (addBloc.state is AddSuccess)
-          Container(
-            child: Row(
-              children: [
-                IconButton(
-                  onPressed: () {},
-                  icon: Icon(Icons.arrow_back_ios_new_rounded),
+          Row(
+            children: [
+              IconButton(
+                onPressed: (addBloc.state as AddSuccess).pageNumber == 1 ? null : () => addBloc.add(AddPreviousPagePressed()),
+                icon: Icon(Icons.arrow_back_ios_new_rounded),
+              ),
+              Text((addBloc.state as AddSuccess).pageNumber.toString()),
+              IconButton(
+                onPressed: () => addBloc.add(AddNextPagePressed()),
+                icon: Icon(Icons.arrow_forward_ios_rounded),
+              ),
+              Expanded(child: Container()),
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: Text(
+                  'Abbrechen',
+                  style: TextStyle(color: lightErrorColor),
                 ),
-                IconButton(
-                  onPressed: () {},
-                  icon: Icon(Icons.arrow_forward_ios_rounded),
-                ),
-                Expanded(child: Container()),
-                TextButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                    foodBloc.add(FoodCancelPressed());
-                  },
-                  child: Text(
-                    'Abbrechen',
-                    style: TextStyle(color: lightErrorColor),
-                  ),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
+
         if (addBloc.state is AddInitial || addBloc.state is AddShowDetails)
           TextButton(
             onPressed: () {
               Navigator.pop(context);
-              foodBloc.add(FoodCancelPressed());
             },
             child: Text('Abbrechen', style: TextStyle(color: lightErrorColor)),
           ),
@@ -183,9 +210,10 @@ class SearchDialog extends StatelessWidget {
         if (addBloc.state is AddShowDetails)
           TextButton(
             onPressed: () {
+              final state = addBloc.state as AddShowDetails;
+              final item = state.requestedFoods[state.index];
+              foodBloc.add(HomeFoodSubmitted(food: item, amount: double.parse(_amountTextController.text)));
               Navigator.pop(context);
-              addBloc.add(AddItemSubmitted(amount: 1));
-              foodBloc.add(FoodCancelPressed());
             },
             child: Text('Ok', style: TextStyle(color: Colors.green)),
           ),

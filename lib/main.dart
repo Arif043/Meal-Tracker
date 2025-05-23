@@ -1,6 +1,6 @@
-import 'package:fitness_tracker/application/target/target_bloc.dart';
-import 'package:fitness_tracker/presentation/root_page.dart';
-import 'package:fitness_tracker/presentation/core/theme.dart';
+import 'package:meal_tracker/application/target/target_bloc.dart';
+import 'package:meal_tracker/presentation/root_page.dart';
+import 'package:meal_tracker/presentation/core/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'bootstrap.dart';

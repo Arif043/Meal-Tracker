@@ -1,10 +1,10 @@
 
-import 'package:fitness_tracker/application/home/home_bloc.dart';
-import 'package:fitness_tracker/domain/repositories/food_repository.dart';
-import 'package:fitness_tracker/infrastructure/repositories/food_repository_impl.dart';
-import 'package:fitness_tracker/infrastructure/service/local_database_service.dart';
-import 'package:fitness_tracker/infrastructure/service/open_food_facts_api.dart';
-import 'package:fitness_tracker/infrastructure/service/sp_service.dart';
+import 'package:meal_tracker/application/home/home_bloc.dart';
+import 'package:meal_tracker/domain/repositories/food_repository.dart';
+import 'package:meal_tracker/infrastructure/repositories/food_repository_impl.dart';
+import 'package:meal_tracker/infrastructure/service/local_database_service.dart';
+import 'package:meal_tracker/infrastructure/service/open_food_facts_api.dart';
+import 'package:meal_tracker/infrastructure/service/sp_service.dart';
 import 'package:get_it/get_it.dart';
 
 import 'application/home/add/add_bloc.dart';

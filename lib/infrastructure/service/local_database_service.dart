@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:fitness_tracker/infrastructure/models/cache.dart';
+import 'package:meal_tracker/infrastructure/models/cache.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:isar/isar.dart';
 import 'package:path_provider/path_provider.dart';

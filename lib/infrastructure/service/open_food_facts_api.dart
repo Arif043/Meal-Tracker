@@ -1,9 +1,9 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
-import 'package:fitness_tracker/infrastructure/exceptions/exceptions.dart';
-import 'package:fitness_tracker/infrastructure/models/consumed_food_model.dart';
-import 'package:fitness_tracker/main.dart';
+import 'package:meal_tracker/infrastructure/exceptions/exceptions.dart';
+import 'package:meal_tracker/infrastructure/models/consumed_food_model.dart';
+import 'package:meal_tracker/main.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -14,7 +14,7 @@ import '../models/food_model.dart';
 class OpenFoodFactsApi {
 
   static final header = {
-    'User-Agent': 'App - Android - Version 0.1',
+    'User-Agent': 'Meal Tracker/1.0 (arif.ertugrul@outlook.com)',
   };
 
   Future<List<Food>> search(String searchTerm, int pageNumber) async {

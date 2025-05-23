@@ -1,8 +1,8 @@
 import 'dart:io';
-import 'package:fitness_tracker/application/target/target_bloc.dart';
-import 'package:fitness_tracker/presentation/core/image_view.dart';
-import 'package:fitness_tracker/presentation/overview_without_target.dart';
-import 'package:fitness_tracker/presentation/search_dialog.dart';
+import 'package:meal_tracker/application/target/target_bloc.dart';
+import 'package:meal_tracker/presentation/core/image_view.dart';
+import 'package:meal_tracker/presentation/overview_without_target.dart';
+import 'package:meal_tracker/presentation/search_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';

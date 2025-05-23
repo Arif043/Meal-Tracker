@@ -1,10 +1,10 @@
 import 'dart:async';
 import 'dart:io';
-import 'package:fitness_tracker/domain/repositories/food_repository.dart';
-import 'package:fitness_tracker/infrastructure/exceptions/exceptions.dart';
-import 'package:fitness_tracker/infrastructure/models/consumed_food_model.dart';
-import 'package:fitness_tracker/infrastructure/service/local_database_service.dart';
-import 'package:fitness_tracker/infrastructure/service/open_food_facts_api.dart';
+import 'package:meal_tracker/domain/repositories/food_repository.dart';
+import 'package:meal_tracker/infrastructure/exceptions/exceptions.dart';
+import 'package:meal_tracker/infrastructure/models/consumed_food_model.dart';
+import 'package:meal_tracker/infrastructure/service/local_database_service.dart';
+import 'package:meal_tracker/infrastructure/service/open_food_facts_api.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:multiple_result/multiple_result.dart';
 import 'package:path_provider/path_provider.dart';

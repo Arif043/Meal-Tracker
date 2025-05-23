@@ -1,5 +1,5 @@
-import 'package:fitness_tracker/presentation/core/format.dart';
-import 'package:fitness_tracker/presentation/core/image_view.dart';
+import 'package:meal_tracker/presentation/core/format.dart';
+import 'package:meal_tracker/presentation/core/image_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../application/home/add/add_bloc.dart';
@@ -214,6 +214,10 @@ class _SearchDialogState extends State<SearchDialog> {
         if (addBloc.state is AddShowDetails)
           TextButton(
             onPressed: () {
+              if (_amountTextController.text.isEmpty) {
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Wert eingeben'), backgroundColor: lightErrorColor,));
+                return;
+              }
               final state = addBloc.state as AddShowDetails;
               final item = state.requestedFoods[state.index];
               foodBloc.add(HomeFoodSubmitted(food: item, amount: double.parse(_amountTextController.text)));

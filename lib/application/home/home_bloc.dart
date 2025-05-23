@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
-import 'package:fitness_tracker/domain/repositories/food_repository.dart';
-import 'package:fitness_tracker/infrastructure/models/consumed_food_model.dart';
-import 'package:fitness_tracker/infrastructure/repositories/food_repository_impl.dart';
+import 'package:meal_tracker/domain/repositories/food_repository.dart';
+import 'package:meal_tracker/infrastructure/models/consumed_food_model.dart';
+import 'package:meal_tracker/infrastructure/repositories/food_repository_impl.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:meta/meta.dart';
 

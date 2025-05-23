@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:fitness_tracker/infrastructure/service/sp_service.dart';
+import 'package:meal_tracker/infrastructure/service/sp_service.dart';
 import 'package:meta/meta.dart';
 
 part 'target_event.dart';

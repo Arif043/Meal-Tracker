@@ -56,7 +56,7 @@ final TextTheme darkTextTheme = TextTheme(
 final FloatingActionButtonThemeData lightFloatingTheme =
     FloatingActionButtonThemeData(
       backgroundColor: appbarColorLight,
-      foregroundColor: containerColorLight,
+      foregroundColor: Color(0xff006abe),
     );
 
 final IconThemeData iconTheme = IconThemeData(color: iconColor);
@@ -73,15 +73,15 @@ final InputDecorationTheme inputDecorationTheme = InputDecorationTheme(
   border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
 );
 
-final TabBarTheme lightTabBarTheme = TabBarTheme(
-  dividerColor: Colors.red,
-  indicatorColor: Colors.orange,
+final TabBarThemeData lightTabBarTheme = TabBarThemeData(
+  dividerColor: Colors.blue,
+  indicatorColor: Colors.green,
   labelStyle: lightBodyText,
-  unselectedLabelStyle: TextStyle(color: Colors.red),
+  unselectedLabelStyle: TextStyle(color: Colors.blue),
 );
 
 final ThemeData lightTheme = ThemeData(
-  // tabBarTheme: lightTabBarTheme,
+  tabBarTheme: lightTabBarTheme,
   inputDecorationTheme: inputDecorationTheme,
   scaffoldBackgroundColor: lightScaffoldColor,
   appBarTheme: AppBarTheme(

@@ -34,15 +34,15 @@ class AddBloc extends Bloc<AddEvent, AddState> {
         await Future.delayed(Duration(seconds: 2));
         if (emit.isDone) return;
         emit(AddLoading());
-        final remoteResult = await _repo.searchRemote(event.searchTerm);
-        remoteResult.when(
-              (success) {
-            emit(AddSuccess(requestedFoods: success, searchInput: event.searchTerm, pageNumber: _repo.pageNumber));
-          },
-              (error) {
-            emit(AddError(failure: error));
-          },
-        );
+        // final remoteResult = await _repo.searchRemote(event.searchTerm);
+        // remoteResult.when(
+        //       (success) {
+        //     emit(AddSuccess(requestedFoods: success, searchInput: event.searchTerm, pageNumber: _repo.pageNumber));
+        //   },
+        //       (error) {
+        //     emit(AddError(failure: error));
+        //   },
+        // );
         //add(AddRemoteRequested(event.searchTerm));
       // }
     }, transformer: restartable());

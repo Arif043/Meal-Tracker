@@ -63,8 +63,10 @@ class _SearchDialogState extends State<SearchDialog> {
 
             case AddLoading():
               return Column(
+                mainAxisSize: MainAxisSize.min,
                 children: [
                   _searchField(context, state.searchInput),
+                  SizedBox(height: 20,),
                   Center(child: CircularProgressIndicator()),
                 ],
               );

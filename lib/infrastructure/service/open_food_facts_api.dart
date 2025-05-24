@@ -30,14 +30,12 @@ class OpenFoodFactsApi {
       }),
       //headers: header,
     );
-    debugPrint(res.body);
     late final Map<String, dynamic> parsedBody;
     try {
       parsedBody = jsonDecode(res.body);
     } on FormatException {
       throw ServerException();
     }
-    debugPrint(res.body);
     if (res.statusCode != 200) throw ServerException();
 
     final products = <Food>[];

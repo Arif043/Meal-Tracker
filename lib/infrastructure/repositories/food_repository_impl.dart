@@ -31,8 +31,6 @@ class FoodRepositoryImpl implements FoodRepository {
     } on ProductsNotFoundException {
       return Error(ProductFailure());
     } catch (e, s) {
-      debugPrint(e.toString());
-      debugPrint(s.toString());
       return Error(GeneralFailure());
     }
   }

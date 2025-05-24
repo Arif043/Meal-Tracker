@@ -75,7 +75,6 @@ class OverviewWithoutTarget extends StatelessWidget {
       lastDate: DateTime.now(),
       initialDate: initial,
     );
-    debugPrint(date.toString());
     if (date != null) {
       context.read<HomeBloc>().add(HomeLoad(time: date));
     }

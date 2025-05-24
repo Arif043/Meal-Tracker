@@ -12,7 +12,7 @@ import 'core/format.dart';
 import 'core/theme.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+  const HomePage({super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -43,7 +43,7 @@ class _HomePageState extends State<HomePage> {
                 initial: state.time,
               ),
               SizedBox(height: 20),
-              Divider(color: containerColorLight, thickness: 0.4),
+              Divider(color: Colors.black87, thickness: 1),
               SizedBox(height: 20),
               if (state.consumedFoods != null)
                 Expanded(
@@ -66,6 +66,7 @@ class _HomePageState extends State<HomePage> {
                       resizeDuration: Duration(milliseconds: 200),
                       child: Material(
                         borderRadius: BorderRadius.circular(12),
+                        elevation: 12,
                         color: containerColorLight,
                         child: InkWell(
                           child: Padding(

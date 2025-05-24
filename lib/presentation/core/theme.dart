@@ -11,9 +11,9 @@ const Color lightTextColorPrimary = Colors.black;
 const Color lightErrorColor = Colors.redAccent;
 final Color lightSuccess = Colors.green[700] ?? Colors.green;
 // Color unselectedLabelColor = Colors.
-final lightScaffoldColor = Colors.yellowAccent[50];
+final lightScaffoldColor = lightSurfaceColor;
 const Color appbarColorLight = Color(0xFFFCD0A1);
-const Color containerTextColorLight = Colors.black;
+const Color containerTextColorLight = Colors.black87;
 const Color containerColorLight = Color(0xFFDDF0FF);
 
 final Color darkPrimaryColor = Colors.blueGrey.shade900;

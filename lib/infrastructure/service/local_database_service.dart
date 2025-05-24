@@ -19,7 +19,6 @@ class LocalDatabaseService {
   }
 
   Future<List<ConsumedFood>> loadConsumedFoods(DateTime selectedDay) async {
-    debugPrint(selectedDay.toString());
     final from = DateTime(selectedDay.year, selectedDay.month, selectedDay.day);
     final to = from.copyWith(hour: 23, minute: 59, second: 59);
     return await _isar.consumedFoods

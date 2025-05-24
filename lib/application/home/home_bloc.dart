@@ -29,7 +29,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
     on<HomeLoad>((event, emit) async {
       final time = event.time;
-      debugPrint("DDD ${time.toString()}");
       final foods = await _repo.loadConsumedFoods(time);
 
       var (accumulatedFat, accumulatedCarbs, accumulatedProtein) = (
@@ -38,7 +37,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         0.0,
       );
       for (var e in foods) {
-        debugPrint(e.name);
         accumulatedFat += e.fat;
         accumulatedCarbs += e.carbs;
         accumulatedProtein += e.protein;

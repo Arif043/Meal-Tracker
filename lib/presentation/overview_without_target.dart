@@ -1,8 +1,8 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:meal_tracker/application/home/home_bloc.dart';
 import 'package:meal_tracker/presentation/core/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../application/target/target_bloc.dart';
 import 'core/format.dart';
 
@@ -41,19 +41,19 @@ class OverviewWithoutTarget extends StatelessWidget {
                             style: lightHeadingText.copyWith(
                               color: containerTextColorLight,
                             ),
-                            "Kohlenhydrate ${pretty(carbs)}g${state.carbs != 0 ? ' / ${state.carbs}g' : ''}",
+                            "${'carbs'.tr()} ${pretty(carbs)}g${state.carbs != 0 ? ' / ${state.carbs}g' : ''}",
                           ),
                           Text(
                             style: lightHeadingText.copyWith(
                               color: containerTextColorLight,
                             ),
-                            "Fett ${pretty(fat)}g${state.fat != 0 ? ' / ${state.fat}g' : ''}",
+                            "${'fat'.tr()} ${pretty(fat)}g${state.fat != 0 ? ' / ${state.fat}g' : ''}",
                           ),
                           Text(
                             style: lightHeadingText.copyWith(
                               color: containerTextColorLight,
                             ),
-                            "Protein ${pretty(protein)}g${state.protein != 0 ? ' / ${state.protein}g' : ''}",
+                            "${'protein'.tr()} ${pretty(protein)}g${state.protein != 0 ? ' / ${state.protein}g' : ''}",
                           ),
                         ],
                       );

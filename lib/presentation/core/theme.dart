@@ -65,12 +65,14 @@ final InputDecorationTheme inputDecorationTheme = InputDecorationTheme(
   filled: true,
   fillColor: appbarColorLight,
   outlineBorder: BorderSide(color: Colors.orange),
-  floatingLabelStyle: const TextStyle(color: Colors.white),
+  floatingLabelStyle: const TextStyle(color: containerTextColorLight),
   focusedBorder: OutlineInputBorder(
     borderRadius: BorderRadius.circular(8),
     //borderSide: const BorderSide(color: Colors.white),
   ),
   border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
+  hintStyle: TextStyle(color: Colors.black54),
+  labelStyle: TextStyle(color: Colors.black54)
 );
 
 final TabBarThemeData lightTabBarTheme = TabBarThemeData(

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:meal_tracker/presentation/core/format.dart';
 import 'package:meal_tracker/presentation/core/image_view.dart';
 import 'package:flutter/material.dart';
@@ -46,10 +47,10 @@ class _SearchDialogState extends State<SearchDialog> {
                     },
                     icon: Icon(Icons.arrow_back),
                   ),
-                  Text('Essen hinzufügen'),
+                  Text('addDialogTitle'.tr()),
                 ],
               )
-              : Text('Essen hinzufügen'),
+              : Text('addDialogTitle'.tr()),
       content: BlocBuilder<AddBloc, AddState>(
         bloc: addBloc,
         builder: (context, state) {
@@ -132,14 +133,14 @@ class _SearchDialogState extends State<SearchDialog> {
                             ),
                             SizedBox(height: 10,),
                             Text(
-                              "Fett: ${prepareValue(requestedFoods[index].fat!)}", //${pretty(requestedFoods[index].fat!)}",
+                              "${'fat'.tr()}: ${prepareValue(requestedFoods[index].fat!)}", //${pretty(requestedFoods[index].fat!)}",
                               style: TextTheme.of(context).bodyMedium,
                             ),
                             Text(
-                              "Kohlenhydrate: ${prepareValue(requestedFoods[index].carbs!)}", //${pretty(requestedFoods[index].carbs!)}",
+                              "${'carbs'.tr()}: ${prepareValue(requestedFoods[index].carbs!)}", //${pretty(requestedFoods[index].carbs!)}",
                             ),
                             Text(
-                              "Protein: ${prepareValue(requestedFoods[index].protein!)}", //${pretty(requestedFoods[index].protein!)}",
+                              "${'protein'.tr()}: ${prepareValue(requestedFoods[index].protein!)}", //${pretty(requestedFoods[index].protein!)}",
                             ),
                             // Text(requestedFoods[index])
                           ],
@@ -150,7 +151,7 @@ class _SearchDialogState extends State<SearchDialog> {
                   SizedBox(height: 20),
                   TextField(
                     controller: _amountTextController,
-                    decoration: InputDecoration(labelText: 'Menge hinzufügen'),
+                    decoration: InputDecoration(labelText: 'addQuantity'.tr()),
                     keyboardType: TextInputType.numberWithOptions(
                       decimal: true,
                     ),
@@ -196,7 +197,7 @@ class _SearchDialogState extends State<SearchDialog> {
                   Navigator.pop(context);
                 },
                 child: Text(
-                  'Abbrechen',
+                  'cancel'.tr(),
                   style: TextStyle(color: lightErrorColor),
                 ),
               ),
@@ -208,14 +209,14 @@ class _SearchDialogState extends State<SearchDialog> {
             onPressed: () {
               Navigator.pop(context);
             },
-            child: Text('Abbrechen', style: TextStyle(color: lightErrorColor)),
+            child: Text('cancel'.tr(), style: TextStyle(color: lightErrorColor)),
           ),
 
         if (addBloc.state is AddShowDetails)
           TextButton(
             onPressed: () {
               if (_amountTextController.text.isEmpty) {
-                ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Wert eingeben'), backgroundColor: lightErrorColor,));
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('enterValue'.tr()), backgroundColor: lightErrorColor,));
                 return;
               }
               final state = addBloc.state as AddShowDetails;
@@ -232,6 +233,7 @@ class _SearchDialogState extends State<SearchDialog> {
   Widget _searchField(BuildContext context, String searchInput) {
     return TextField(
       controller: TextEditingController(text: searchInput),
+      decoration: InputDecoration(hintText: "searchForProducts".tr()),
       onChanged: (value) async {
         context.read<AddBloc>().add(AddRequested(value));
       },

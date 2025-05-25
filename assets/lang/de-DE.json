@@ -1,0 +1,18 @@
+{
+  "overview": "Übersicht",
+  "target": "Ziel",
+  "carbs": "Kohlenhydrate",
+  "fat": "Fett",
+  "protein": "Protein",
+  "privacy": "Datenschutzerklärung",
+  "about": "Über die App",
+  "targetHeader": "Lege fest, wie viel du konsumieren willst",
+  "save": "Speichern",
+  "cancel": "Abbrechen",
+  "addDialogTitle": "Produkt hinzufügen",
+  "addQuantity": "Menge hinzufügen",
+  "searchForProducts": "Suche nach Produkten",
+  "enterValue": "Wert eingeben",
+  "success": "Ziel gespeichert",
+  "privacyContent": "\nInformationspflichten gemäß Art. 13 DSGVO\n\n1. Bezeichnung der Verarbeitungstätigkeit\n\nDatenschutzhinweise im Zusammenhang mit der Nutzung der Meal Tracker App.\n\n2. Name und Kontaktdaten des Verantwortlichen\n\nVerantwortlich für die Datenerhebung ist: \nArif Ertugrul\narif.ertugrul@outlook.com\n\n3. Kontaktdaten des Datenschutzbeauftragten\n\nEin behördlicher Datenschutzbeauftragter ist für dieses private Projekt nicht benannt. Bei Fragen wenden Sie sich bitte direkt an die oben genannte Kontaktadresse.\n\n4. Zwecke und Rechtsgrundlagen der Verarbeitung\n\n4a) Zwecke der Verarbeitung:\nIhre Daten werden dafür erhoben, um:\n\nLebensmittel und Nährwertdaten lokal zu speichern und anzuzeigen\n\nNährstoffziele zu setzen und zu überprüfen\n\nLebensmittelinformationen über die OpenFoodFacts-API bereitzustellen\n\n4b) Rechtsgrundlagen der Verarbeitung:\nIhre Daten werden auf Grundlage von Art. 6 Abs. 1 Buchstabe a DSGVO (Einwilligung) verarbeitet. Die Nutzung des Dienstes OpenFoodFacts erfolgt auf Grundlage berechtigter Interessen gemäß Art. 6 Abs. 1 Buchstabe f DSGVO, um die Funktionalität der App bereitzustellen.\n\n5. Empfänger oder Kategorien von Empfängern der personenbezogenen Daten\n\nIhre personenbezogenen Daten werden nicht an Dritte weitergegeben.\n\nEine Ausnahme bildet die technische Anfrage an den Dienst:\n\nOpenFoodFacts.org (zur Bereitstellung von Lebensmittelinformationen)\nDabei wird die IP-Adresse beim Abruf von Daten übertragen. Es findet jedoch keine personenbezogene Verknüpfung statt.\n\n6. Dauer der Speicherung der personenbezogenen Daten\n\nIhre Daten werden ausschließlich lokal auf Ihrem Gerät gespeichert und verbleiben dort, solange Sie sie nicht selbst über die App löschen oder die App deinstallieren. Eine serverseitige Speicherung erfolgt nicht.\n\n7. Betroffenenrechte\n\nNach der Datenschutz-Grundverordnung stehen Ihnen folgende Rechte zu:\n\nAuskunft über die gespeicherten personenbezogenen Daten (Art. 15 DSGVO)\n\nBerichtigung unrichtiger Daten (Art. 16 DSGVO)\n\nLöschung der Daten (Art. 17 DSGVO)\n\nEinschränkung der Verarbeitung (Art. 18 DSGVO)\n\nWiderspruch gegen die Verarbeitung (Art. 21 DSGVO)\n\nDatenübertragbarkeit (Art. 20 DSGVO), sofern technisch möglich\n\nBeschwerderecht bei einer Datenschutzaufsichtsbehörde\n\nHinweis:\nDa alle personenbezogenen Daten ausschließlich lokal auf Ihrem Gerät gespeichert werden und keine Übertragung an Server oder Dritte erfolgt, können Sie Ihre Daten jederzeit eigenständig durch Löschen der App oder Nutzung der entsprechenden Funktion in der App entfernen.\n\n8. Widerrufsrecht bei Einwilligung\n\nWenn Sie in die Datenverarbeitung durch den Verantwortlichen eingewilligt haben, können Sie diese Einwilligung jederzeit mit Wirkung für die Zukunft widerrufen. Die bis zum Widerruf erfolgte Datenverarbeitung bleibt rechtmäßig.\n"
+}

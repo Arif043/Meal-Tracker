@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:meal_tracker/application/target/target_bloc.dart';
 import 'package:meal_tracker/presentation/core/image_view.dart';
 import 'package:meal_tracker/presentation/overview_without_target.dart';
@@ -103,7 +104,7 @@ class _HomePageState extends State<HomePage> {
                                         ),
                                         SizedBox(height: 10),
                                         Text(
-                                          "Fett: ${state.consumedFoods![index].fat.toString().isNotEmpty ? "${pretty(state.consumedFoods![index].fat)}g" : prepareValue(state.consumedFoods![index].fat.toString())}", //${pretty(requestedFoods[index].fat!)}",
+                                          "${'fat'.tr()}: ${state.consumedFoods![index].fat.toString().isNotEmpty ? "${pretty(state.consumedFoods![index].fat)}g" : prepareValue(state.consumedFoods![index].fat.toString())}", //${pretty(requestedFoods[index].fat!)}",
                                           style: TextTheme.of(context)
                                               .bodyMedium
                                               ?.copyWith(
@@ -111,7 +112,7 @@ class _HomePageState extends State<HomePage> {
                                               ),
                                         ),
                                         Text(
-                                          "Kohlenhydrate: ${state.consumedFoods![index].carbs.toString().isNotEmpty ? "${pretty(state.consumedFoods![index].carbs)}g" : prepareValue(state.consumedFoods![index].carbs.toString())}",
+                                          "${'carbs'.tr()}: ${state.consumedFoods![index].carbs.toString().isNotEmpty ? "${pretty(state.consumedFoods![index].carbs)}g" : prepareValue(state.consumedFoods![index].carbs.toString())}",
                                           style: TextTheme.of(context)
                                               .bodyMedium
                                               ?.copyWith(
@@ -119,7 +120,7 @@ class _HomePageState extends State<HomePage> {
                                               ),
                                         ),
                                         Text(
-                                          "Protein: ${state.consumedFoods![index].protein.toString().isNotEmpty ? "${pretty(state.consumedFoods![index].protein)}g" : prepareValue(state.consumedFoods![index].protein.toString())}",
+                                          "${'protein'.tr()}: ${state.consumedFoods![index].protein.toString().isNotEmpty ? "${pretty(state.consumedFoods![index].protein)}g" : prepareValue(state.consumedFoods![index].protein.toString())}",
                                           style: TextTheme.of(context)
                                               .bodyMedium
                                               ?.copyWith(

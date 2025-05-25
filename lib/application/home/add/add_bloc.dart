@@ -31,47 +31,79 @@ class AddBloc extends Bloc<AddEvent, AddState> {
       // }
       // // Remote API Call
       // else {
-        await Future.delayed(Duration(seconds: 2));
-        if (emit.isDone) return;
-        emit(AddLoading(searchInput: event.searchTerm));
-         final remoteResult = await _repo.searchRemote(event.searchTerm);
-         remoteResult.when(
-               (success) {
-             emit(AddSuccess(requestedFoods: success, searchInput: event.searchTerm, pageNumber: _repo.pageNumber));
-           },
-               (error) {
-             emit(AddError(failure: error, searchInput: event.searchTerm));
-           },
-         );
-        //add(AddRemoteRequested(event.searchTerm));
+      await Future.delayed(Duration(seconds: 2));
+      if (emit.isDone) return;
+      emit(AddLoading(searchInput: event.searchTerm));
+      final remoteResult = await _repo.searchRemote(event.searchTerm);
+      remoteResult.when(
+        (success) {
+          emit(
+            AddSuccess(
+              requestedFoods: success,
+              searchInput: event.searchTerm,
+              pageNumber: _repo.pageNumber,
+            ),
+          );
+        },
+        (error) {
+          emit(AddError(failure: error, searchInput: event.searchTerm));
+        },
+      );
+      //add(AddRemoteRequested(event.searchTerm));
       // }
     }, transformer: restartable());
 
     on<AddItemSelected>((event, emit) {
       final s = state as AddSuccess;
-      emit(AddShowDetails(requestedFoods: s.requestedFoods, index: event.index));
-    },);
+      emit(
+        AddShowDetails(requestedFoods: s.requestedFoods, index: event.index),
+      );
+    });
 
     on<AddBackToResults>((event, emit) {
-      emit(AddSuccess(requestedFoods: (state as AddShowDetails).requestedFoods, searchInput: state.searchInput, pageNumber: _repo.pageNumber));
-    },);
+      emit(
+        AddSuccess(
+          requestedFoods: (state as AddShowDetails).requestedFoods,
+          searchInput: state.searchInput,
+          pageNumber: _repo.pageNumber,
+        ),
+      );
+    });
 
     on<AddPreviousPagePressed>((event, emit) async {
       final newResult = await _repo.showPreviousPage(state.searchInput);
-      newResult.when((success) {
-        emit(AddSuccess(requestedFoods: success, searchInput: state.searchInput, pageNumber: _repo.pageNumber));
-      }, (error) {
-
-      },);
-    },);
+      newResult.when(
+        (success) {
+          emit(
+            AddSuccess(
+              requestedFoods: success,
+              searchInput: state.searchInput,
+              pageNumber: _repo.pageNumber,
+            ),
+          );
+        },
+        (error) {
+          emit(AddError(failure: error, searchInput: state.searchInput));
+        },
+      );
+    });
 
     on<AddNextPagePressed>((event, emit) async {
       final newResult = await _repo.showNextPage(state.searchInput);
-      newResult.when((success) {
-        emit(AddSuccess(requestedFoods: success, searchInput: state.searchInput, pageNumber: _repo.pageNumber));
-      }, (error) {
-
-      });
-    },);
+      newResult.when(
+        (success) {
+          emit(
+            AddSuccess(
+              requestedFoods: success,
+              searchInput: state.searchInput,
+              pageNumber: _repo.pageNumber,
+            ),
+          );
+        },
+        (error) {
+          emit(AddError(failure: error, searchInput: state.searchInput));
+        },
+      );
+    });
   }
 }

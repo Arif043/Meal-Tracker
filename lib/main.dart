@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:meal_tracker/application/target/target_bloc.dart';
 import 'package:meal_tracker/presentation/root_page.dart';
 import 'package:meal_tracker/presentation/core/theme.dart';
@@ -9,9 +10,15 @@ import 'application/home/home_bloc.dart';
 const APP_NAME = 'Fitness-Tracker';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
   await init();
-  runApp(const MyApp());
+  runApp(
+    EasyLocalization(
+      supportedLocales: [Locale('en', 'US'), Locale('de', 'DE')],
+      path: 'assets/lang',
+      fallbackLocale: Locale('en', 'US'),
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -25,15 +32,17 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           lazy: false,
           create: (context) =>
-          i<HomeBloc>()
-            ..add(HomeLoad(time: DateTime.now())),
+              i<HomeBloc>()..add(HomeLoad(time: DateTime.now())),
         ),
         BlocProvider(
           create: (context) => i<TargetBloc>()..add(TargetLoadValues()),
         ),
       ],
       child: MaterialApp(
-        title: 'Fitness',
+        title: 'Meal Tracker',
+        localizationsDelegates: context.localizationDelegates,
+        supportedLocales: context.supportedLocales,
+        locale: context.locale,
         debugShowCheckedModeBanner: false,
         theme: lightTheme,
         home: const RootPage(),

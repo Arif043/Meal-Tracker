@@ -6,7 +6,6 @@ import 'package:meal_tracker/infrastructure/models/consumed_food_model.dart';
 import 'package:meal_tracker/main.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:uuid/v4.dart';
 import '../models/food_model.dart';
@@ -19,7 +18,7 @@ class OpenFoodFactsApi {
 
   Future<List<Food>> search(String searchTerm, int pageNumber) async {
     final res = await http.get(
-      Uri.https('de.openfoodfacts.org', '/cgi/search.pl', {
+      Uri.https('world.openfoodfacts.org', '/cgi/search.pl', {
         'search_terms': searchTerm,
         'search_simple': '1',
         'action': "process",

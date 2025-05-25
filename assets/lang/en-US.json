@@ -1,0 +1,18 @@
+{
+  "overview": "Overview",
+  "target": "Target",
+  "carbs": "Carbohydrates",
+  "fat": "Fat",
+  "protein": "Protein",
+  "privacy": "Privacy Content",
+  "about": "About the app",
+  "targetHeader": "Determine how much you want to consume",
+  "save": "Save",
+  "cancel": "Cancel",
+  "addDialogTitle": "Add product",
+  "addQuantity": "Quantity",
+  "searchForProducts": "Search for products",
+  "enterValue": "Enter value",
+  "success": "Target saved",
+  "privacyContent": "Introduction\n\nOur privacy policy will help you understand what information we collect at Meal Tracker, how Meal\nTracker uses it, and what choices you have.\nMeal Tracker was created by Arif Ertugrul as a free app. This SERVICE is provided by Arif Ertugrulat no cost and is intended for use as is.\nIf you choose to use our Service, then you agree to the collection and use of information in relation with this policy.\nThe Personal Information that we collect is used for providing and improving the Service. We will not use or share your information with anyone except as described in this Privacy Policy.\nThe terms used in this Privacy Policy have the same meanings as in our Terms and Conditions,\nwhich are accessible on our website, unless otherwise defined in this Privacy Policy.\n\nInformation Collection and Use\n\nTo provide a better experience, the app may ask you to input certain personal information such as\nfood data and nutrition goals.\nHowever, this data is stored exclusively on your device and is never transmitted to us or any server.\nThe app uses the external service OpenFoodFacts.org to retrieve food data. When doing so, your IP address may be transmitted as part of the request.\nHowever, no personal linkage is made.\n\nCookies\n\nCookies are small files that commonly serve as anonymous unique identifiers. They are sent to your browser from websites you visit and stored in your device's memory.\nThis app does not use cookies directly. However, third-party code or libraries (such as\nOpenFoodFacts) may use cookies to collect information and improve their services.\nYou can choose to accept or reject these cookies, and be notified when one is being sent.\nIf you reject cookies, some parts of the Service may not function properly.\n\nService Providers\n\nWe may use third-party services for the following reasons:\nPrivacy Policy\n- To retrieve product and nutrition data (via OpenFoodFacts)\nThese third parties may receive data such as your IP address for technical reasons.\nHowever, they are obligated not to link this data to your identity or use it for any other purpose.\n\nSecurity\n\nWe value your trust in using our app and strive to protect any local information stored on your\ndevice.\nHowever, please note that no storage method - even locally - is 100 percent secure.\nWe encourage you to manage your data responsibly using the app's built-in tools.\n\nChildren's Privacy\n\nThis Service is not directed at children under 13.\nWe do not knowingly collect personal information from children.\nIf we discover that a child under 13 has used the app in a way that involves personal data,\nwe encourage parents or guardians to take appropriate action, including deleting the app data or the app itself.\n\nChanges to This Privacy Policy\n\nWe may update our Privacy Policy from time to time. You are advised to check this page regularly\nfor changes.\nAny changes will take effect immediately upon being posted here.\n\nContact Us\n\nIf you have any questions or suggestions about our Privacy Policy, do not hesitate to contact us.\nContact Information:\nEmail: arif.ertugrul@outlook.com"
+}

@@ -1,4 +1,6 @@
 
+import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:meal_tracker/application/home/home_bloc.dart';
 import 'package:meal_tracker/domain/repositories/food_repository.dart';
 import 'package:meal_tracker/infrastructure/repositories/food_repository_impl.dart';
@@ -13,6 +15,9 @@ import 'application/target/target_bloc.dart';
 final i = GetIt.I;
 
 Future<void> init() async {
+
+  WidgetsFlutterBinding.ensureInitialized();
+  await EasyLocalization.ensureInitialized();
 
   // Services
   i.registerSingletonAsync<LocalDatabaseService>(() async {

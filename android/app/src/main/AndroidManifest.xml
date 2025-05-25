@@ -6,7 +6,7 @@ package="io.github.arif043.mealtracker">
 
 
     <application
-        android:label="Meal Trackerr"
+        android:label="Meal Tracker"
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon">
 

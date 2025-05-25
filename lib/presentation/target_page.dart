@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:meal_tracker/application/target/target_bloc.dart';
 import 'package:meal_tracker/presentation/core/theme.dart';
 import 'package:flutter/material.dart';
@@ -21,9 +22,9 @@ class _TargetPageState extends State<TargetPage> {
     final fat = state.fat;
     final carbs = state.carbs;
     final protein = state.protein;
-    _fatCtr = TextEditingController(text: fat.toString());
-    _proteinCtr = TextEditingController(text: protein.toString());
-    _carbsCtr = TextEditingController(text: carbs.toString());
+    _fatCtr = TextEditingController(text: fat.toString() != '0' ? fat.toString() : '');
+    _proteinCtr = TextEditingController(text: protein.toString() != '0' ? protein.toString() : '');
+    _carbsCtr = TextEditingController(text: carbs.toString() != '0' ? carbs.toString() : '');
   }
 
   @override
@@ -44,7 +45,7 @@ class _TargetPageState extends State<TargetPage> {
             Padding(
               padding: const EdgeInsets.only(bottom: 32, top: 8),
               child: Text(
-                'Lege fest, wie viel du konsumieren willst',
+                'targetHeader'.tr(),
                 textAlign: TextAlign.center,
                 style: TextTheme.of(context).displayLarge,
               ),
@@ -55,16 +56,7 @@ class _TargetPageState extends State<TargetPage> {
                 Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Text('Fett'),
-                    SizedBox(width: 10),
-                    SizedBox(width: 75, child: TextField(controller: _fatCtr, keyboardType: TextInputType.number, inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'^[1-9][0-9]*'))])),
-                  ],
-                ),
-                SizedBox(height: 20),
-                Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text('Kohlenhydrate'),
+                    Text('carbs'.tr()),
                     SizedBox(width: 10),
                     SizedBox(
                       width: 75,
@@ -76,7 +68,16 @@ class _TargetPageState extends State<TargetPage> {
                 Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Text('Protein'),
+                    Text('fat'.tr()),
+                    SizedBox(width: 10),
+                    SizedBox(width: 75, child: TextField(controller: _fatCtr, keyboardType: TextInputType.number, inputFormatters: [FilteringTextInputFormatter.allow(RegExp(r'^[1-9][0-9]*'))])),
+                  ],
+                ),
+                SizedBox(height: 20),
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text('protein'.tr()),
                     SizedBox(width: 10),
                     SizedBox(
                       width: 75,
@@ -89,16 +90,18 @@ class _TargetPageState extends State<TargetPage> {
             SizedBox(height: 64),
             FilledButton(
               onPressed: () {
+                if (_fatCtr.text.isEmpty || _carbsCtr.text.isEmpty || _proteinCtr.text.isEmpty)
+                  return;
                 context.read<TargetBloc>().add(
                   TargetValuesUpdated(
-                    fat: int.parse(_fatCtr.text),
-                    carbs: int.parse(_carbsCtr.text),
-                    protein: int.parse(_proteinCtr.text),
+                    fat: int.parse(_fatCtr.text.isEmpty ? '0' : _fatCtr.text),
+                    carbs: int.parse(_carbsCtr.text.isEmpty ? '0' : _carbsCtr.text),
+                    protein: int.parse(_proteinCtr.text.isEmpty ? '0' : _proteinCtr.text),
                   ),
                 );
-                ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Ziel gespeichert"), backgroundColor: lightSuccess,));
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("success".tr()), backgroundColor: lightSuccess,));
               },
-              child: Text('Speichern'),
+              child: Text('save'.tr()),
             ),
           ],
         ),
